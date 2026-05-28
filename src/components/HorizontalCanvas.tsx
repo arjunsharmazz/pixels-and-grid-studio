@@ -66,9 +66,6 @@ export function HorizontalCanvas({ children }: { children: React.ReactNode }) {
     };
   }, [isMobile]);
 
-  const scrollTo = (frac: number) => {
-    targetRef.current = maxRef.current * Math.max(0, Math.min(1, frac));
-  };
 
   if (isMobile) {
     return <div className="bg-paper">{children}</div>;
