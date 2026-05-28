@@ -126,7 +126,7 @@ function IntroPanel() {
 
 
         {/* SIDE description — separate column, no overlap */}
-        <Reveal delay={380} className="hidden lg:flex col-span-3 row-span-4 row-start-2 col-start-10 flex-col justify-end gap-6">
+        <Reveal delay={380} className="flex col-span-4 row-span-4 row-start-2 col-start-9 flex-col justify-end gap-5">
           <div className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Manifest 001 ]</div>
           <p className="text-sm text-ink/80 leading-relaxed">
             An independent studio engineering brands, products, and motion experiences for teams reshaping their categories.
