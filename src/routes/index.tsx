@@ -4,6 +4,9 @@ import { Loader } from "@/components/Loader";
 import { PixelCursor } from "@/components/PixelCursor";
 import { SideNav } from "@/components/SideNav";
 import { Reveal } from "@/components/Reveal";
+import { HorizontalCanvas } from "@/components/HorizontalCanvas";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,10 +21,10 @@ export const Route = createFileRoute("/")({
 });
 
 const WORK = [
-  { n: "01", title: "Helio Capital", tag: "Brand · Web", year: "2025", grad: "from-neutral-200 to-neutral-400" },
-  { n: "02", title: "Northbound OS", tag: "Product · System", year: "2025", grad: "from-stone-300 to-stone-500" },
-  { n: "03", title: "Atlas Motion", tag: "Identity · Film", year: "2024", grad: "from-zinc-200 to-zinc-500" },
-  { n: "04", title: "Mono / Studio", tag: "Editorial · Web", year: "2024", grad: "from-neutral-300 to-neutral-600" },
+  { n: "01", title: "Helio", sub: "Capital", tag: "Brand · Web", year: "2025", grad: "from-neutral-200 to-neutral-400" },
+  { n: "02", title: "Northbound", sub: "OS", tag: "Product · System", year: "2025", grad: "from-stone-300 to-stone-500" },
+  { n: "03", title: "Atlas", sub: "Motion", tag: "Identity · Film", year: "2024", grad: "from-zinc-200 to-zinc-500" },
+  { n: "04", title: "Mono", sub: "Studio", tag: "Editorial · Web", year: "2024", grad: "from-neutral-300 to-neutral-600" },
 ];
 
 const SERVICES = [
@@ -40,308 +43,459 @@ const PROCESS = [
 ];
 
 const TESTIMONIALS = [
-  { q: "Pixels & Grid rebuilt our brand from first principles. The result is unmistakable.", a: "Maya Okafor", r: "VP Brand, Helio" },
+  { q: "Pixels & Grid rebuilt our brand from first principles. Unmistakable.", a: "Maya Okafor", r: "VP Brand, Helio" },
   { q: "A rare studio that ships systems, not screenshots. Quietly transformational.", a: "Daniel Reyes", r: "CPO, Northbound" },
   { q: "Editorial taste, engineering rigor. We hired them three times in a year.", a: "Inès Laurent", r: "Founder, Atlas" },
 ];
 
-const FAQ = [
-  { q: "How do projects typically start?", a: "With a two-week discovery sprint — audits, interviews, and a creative direction document." },
-  { q: "What does an engagement cost?", a: "Most engagements range from $40k to $300k. Retainers from $15k/mo." },
-  { q: "Do you work with in-house teams?", a: "Yes. We embed with brand, product, and engineering teams across timezones." },
-  { q: "Where are you based?", a: "Distributed studio — Lisbon, New York, Tokyo." },
-];
-
 function Home() {
   const [loading, setLoading] = useState(true);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (loading) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
   }, [loading]);
 
   return (
     <div className="relative bg-paper text-ink">
       {loading && <Loader onDone={() => setLoading(false)} />}
-      <PixelCursor />
+      {!isMobile && <PixelCursor />}
+      {isMobile ? <MobileView /> : <DesktopView />}
+    </div>
+  );
+}
+
+/* ============================== DESKTOP ============================== */
+
+function DesktopView() {
+  return (
+    <>
       <SideNav />
+      <HorizontalCanvas>
+        <IntroPanel />
+        <WorkPanel />
+        <AboutPanel />
+        <ServicesPanel />
+        <ProcessPanel />
+        <VoicesPanel />
+        <ContactPanel />
+      </HorizontalCanvas>
+    </>
+  );
+}
 
-      {/* HERO */}
-      <section id="work-anchor" className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-70" />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 70% 30%, transparent 0%, var(--paper) 80%)" }} />
+function Panel({ children, dark = false, width = "100vw", id }: { children: React.ReactNode; dark?: boolean; width?: string; id?: string }) {
+  return (
+    <section
+      id={id}
+      className={`relative h-screen shrink-0 ${dark ? "bg-ink text-paper" : "bg-paper text-ink"}`}
+      style={{ width }}
+    >
+      <div className={`absolute inset-0 ${dark ? "grid-bg-dark" : "grid-bg-fine"} opacity-60 pointer-events-none`} />
+      {children}
+    </section>
+  );
+}
 
-        {/* Top bar */}
-        <div className="relative z-10 flex items-center justify-between px-6 md:px-14 pt-6 text-[11px] uppercase tracking-[0.25em]">
-          <span className="font-display text-base tracking-tight">Pixels<span className="opacity-40">/</span>Grid</span>
-          <span className="hidden md:inline">Index — MMXXVI</span>
-          <a href="#contact" className="border border-ink px-3 py-2 hover:bg-ink hover:text-paper transition-colors">Start a project →</a>
-        </div>
+function IntroPanel() {
+  return (
+    <Panel id="intro" width="100vw">
+      {/* Top frame */}
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-14 py-6 text-[10px] uppercase tracking-[0.3em]">
+        <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
+        <span className="opacity-50">Index — MMXXVI</span>
+        <a href="#contact" className="border border-ink px-3 py-2 hover:bg-ink hover:text-paper transition-colors">Start a project →</a>
+      </div>
 
-        <div className="relative z-10 px-6 md:px-24 pt-24 md:pt-36">
-          <Reveal>
-            <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-10">
-              <span className="h-2 w-2 bg-ink" />
-              <span>A futurist design studio · Est. 2019</span>
-            </div>
-          </Reveal>
+      {/* Hero grid: 12-col layout, clearly separated zones */}
+      <div className="absolute inset-0 pt-28 pb-20 pl-32 pr-14 grid grid-cols-12 grid-rows-6 gap-x-8">
+        {/* meta */}
+        <Reveal className="col-span-12 row-span-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-ink/60">
+          <span className="h-2 w-2 bg-ink" />
+          <span>A futurist design studio · Est. 2019</span>
+          <span className="ml-auto">N 38.72 / W 9.13 — Lisbon</span>
+        </Reveal>
 
-          <h1 className="font-display text-balance text-[clamp(3rem,12vw,11.5rem)] leading-[0.88] tracking-[-0.05em]">
-            <Reveal as="span" className="block">Design for</Reveal>
-            <Reveal as="span" delay={120} className="block">the systems</Reveal>
-            <Reveal as="span" delay={240} className="block italic font-light">that come next.</Reveal>
-          </h1>
+        {/* HEADLINE — cols 1-8, leaves 9-12 free for side column */}
+        <h1 className="col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
+            style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}>
+          <Reveal as="span" className="block">Design for</Reveal>
+          <Reveal as="span" delay={120} className="block">the systems</Reveal>
+          <Reveal as="span" delay={240} className="block italic font-light">that come next.</Reveal>
+        </h1>
 
-          <div className="mt-16 grid grid-cols-12 gap-6">
-            <Reveal delay={300} className="col-span-12 md:col-span-5 md:col-start-7">
-              <p className="text-base md:text-lg text-muted-foreground max-w-md">
-                Pixels & Grid is an independent studio engineering brands, products, and motion experiences for ambitious teams reshaping their categories.
-              </p>
-              <div className="mt-8 flex gap-3">
-                <a href="#work" className="bg-ink text-paper px-5 py-3 text-[11px] uppercase tracking-[0.25em] hover:opacity-90">View Work</a>
-                <a href="#contact" className="border border-ink px-5 py-3 text-[11px] uppercase tracking-[0.25em] hover:bg-ink hover:text-paper transition-colors">Get in touch</a>
-              </div>
-            </Reveal>
+
+        {/* SIDE description — separate column, no overlap */}
+        <Reveal delay={380} className="flex col-span-4 row-span-4 row-start-2 col-start-9 flex-col justify-end gap-5">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Manifest 001 ]</div>
+          <p className="text-sm text-ink/80 leading-relaxed">
+            An independent studio engineering brands, products, and motion experiences for teams reshaping their categories.
+          </p>
+          <div className="flex flex-col gap-2">
+            <a href="#work" className="bg-ink text-paper px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:opacity-90">View Work →</a>
+            <a href="#contact" className="border border-ink px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:bg-ink hover:text-paper transition-colors">Get in touch</a>
           </div>
-        </div>
+        </Reveal>
 
-        {/* Footer of hero */}
-        <div className="absolute bottom-6 left-6 right-6 z-10 flex justify-between text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-          <span>↓ Scroll · Featured Work</span>
-          <span>52.5200° N / 13.4050° E</span>
+        {/* bottom bar */}
+        <div className="col-span-12 row-span-1 self-end flex justify-between text-[10px] uppercase tracking-[0.3em] text-ink/60">
+          <span className="flex items-center gap-2"><span className="inline-block animate-pulse">→</span> Scroll horizontally</span>
+          <span>Brand · Product · Motion · Web</span>
+          <span>01 / 07</span>
         </div>
-      </section>
+      </div>
+    </Panel>
+  );
+}
 
-      {/* FEATURED WORK */}
-      <section id="work" className="relative px-6 md:px-24 py-32 border-t border-ink">
-        <div className="flex justify-between items-end mb-16">
+function WorkPanel() {
+  return (
+    <Panel id="work" width="180vw">
+      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+        <div className="flex items-end justify-between mb-12">
           <Reveal>
-            <div className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-3">[ 01 ] Selected Work</div>
-            <h2 className="font-display text-5xl md:text-7xl tracking-tight">Recent projects.</h2>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 02 ] Selected Work</div>
+            <h2 className="font-display text-6xl tracking-tight">Recent projects.</h2>
           </Reveal>
-          <span className="hidden md:inline text-[11px] uppercase tracking-[0.3em] text-muted-foreground">2024 — 2025</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-ink/60">2024 — 2025</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div className="flex-1 grid grid-cols-4 gap-8">
           {WORK.map((w, idx) => (
-            <Reveal
-              key={w.n}
-              delay={idx * 80}
-              className={
-                idx % 4 === 0 ? "md:col-span-7" :
-                idx % 4 === 1 ? "md:col-span-5" :
-                idx % 4 === 2 ? "md:col-span-5 md:col-start-2" :
-                "md:col-span-6"
-              }
-            >
-              <a href="#" className="group block">
-                <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${w.grad}`}>
-                  <div className="absolute inset-0 grid-bg opacity-40 group-hover:opacity-70 transition-opacity duration-700" />
-                  <div className="absolute inset-0 flex items-end p-6 transition-transform duration-700 group-hover:scale-[1.02]">
-                    <span className="font-display text-paper text-[clamp(2rem,5vw,5rem)] mix-blend-difference leading-none">{w.title}</span>
-                  </div>
+            <Reveal key={w.n} delay={idx * 80} className="flex flex-col group">
+              <a href="#" className="block">
+                <div className={`relative aspect-[3/4] overflow-hidden bg-gradient-to-br ${w.grad}`}>
+                  <div className="absolute inset-0 grid-bg-fine opacity-40 group-hover:opacity-70 transition-opacity duration-700" />
                   <div className="absolute top-4 left-4 text-[10px] font-mono uppercase tracking-widest text-paper mix-blend-difference">{w.n}</div>
                   <div className="absolute top-4 right-4 text-[10px] font-mono uppercase tracking-widest text-paper mix-blend-difference">{w.year}</div>
+                  <div className="absolute inset-x-0 bottom-0 p-5 transition-transform duration-700 group-hover:-translate-y-2">
+                    <div className="font-display text-paper leading-none mix-blend-difference" style={{ fontSize: "clamp(2rem,3.5vw,4rem)" }}>
+                      {w.title}
+                    </div>
+                    <div className="font-display italic font-light text-paper leading-none mix-blend-difference opacity-80" style={{ fontSize: "clamp(1.4rem,2.4vw,2.6rem)" }}>
+                      {w.sub}
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-4 flex justify-between text-[11px] uppercase tracking-[0.25em]">
+                <div className="mt-4 flex justify-between text-[10px] uppercase tracking-[0.25em]">
                   <span>{w.tag}</span>
-                  <span className="group-hover:translate-x-1 transition-transform">View case ↗</span>
+                  <span className="group-hover:translate-x-1 transition-transform">View ↗</span>
                 </div>
               </a>
             </Reveal>
           ))}
         </div>
-      </section>
+      </div>
+    </Panel>
+  );
+}
 
-      {/* ABOUT */}
-      <section id="about" className="relative px-6 md:px-24 py-32 border-t border-ink">
-        <div className="grid grid-cols-12 gap-6">
-          <Reveal className="col-span-12 md:col-span-3">
-            <div className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">[ 02 ] About</div>
-          </Reveal>
-          <div className="col-span-12 md:col-span-9">
-            <Reveal>
-              <h2 className="font-display text-balance text-[clamp(2.5rem,6vw,6rem)] leading-[0.95] tracking-[-0.04em]">
-                We are a small studio that designs at the intersection of <span className="italic font-light">craft, code, and consequence.</span>
-              </h2>
-            </Reveal>
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
-              {[
-                { k: "127", v: "Projects shipped" },
-                { k: "12", v: "Awwwards & FWA" },
-                { k: "9", v: "Designers in studio" },
-              ].map((s) => (
-                <Reveal key={s.k} className="border-t border-ink pt-4">
-                  <div className="font-display text-5xl">{s.k}</div>
-                  <div className="mt-2 text-[11px] uppercase tracking-[0.25em] text-muted-foreground">{s.v}</div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+function AboutPanel() {
+  return (
+    <Panel id="about" width="120vw">
+      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 grid grid-cols-12 gap-8">
+        <div className="col-span-3">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 03 ] About</div>
+          <p className="text-sm text-ink/70 leading-relaxed max-w-[28ch]">
+            Nine designers, two writers, four engineers. One discipline: editorial craft applied to interactive systems.
+          </p>
         </div>
-      </section>
-
-      {/* SERVICES — dark */}
-      <section id="services" className="relative bg-ink text-paper px-6 md:px-24 py-32">
-        <div className="absolute inset-0 grid-bg-dark opacity-50" />
-        <div className="relative">
-          <div className="flex justify-between items-end mb-20">
-            <Reveal>
-              <div className="text-[11px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 03 ] Services</div>
-              <h2 className="font-display text-5xl md:text-7xl tracking-tight">What we do.</h2>
-            </Reveal>
-          </div>
-
-          <div>
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.n} delay={i * 60}>
-                <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-paper/20 py-10 last:border-b">
-                  <div className="col-span-2 md:col-span-1 font-mono text-sm opacity-60">{s.n}</div>
-                  <div className="col-span-10 md:col-span-6">
-                    <h3 className="font-display text-3xl md:text-6xl tracking-tight transition-transform duration-500 group-hover:translate-x-3">
-                      {s.t}
-                    </h3>
-                  </div>
-                  <div className="col-span-12 md:col-span-4 text-sm opacity-70">{s.d}</div>
-                  <div className="hidden md:flex col-span-1 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="grid grid-cols-3 gap-0.5">
-                      {Array.from({ length: 9 }).map((_, k) => (
-                        <span key={k} className="h-1 w-1 bg-paper" />
-                      ))}
-                    </div>
-                  </div>
-                </a>
+        <div className="col-span-9 flex flex-col justify-between">
+          <Reveal>
+            <h2 className="font-display text-balance leading-[0.95] tracking-[-0.04em]" style={{ fontSize: "clamp(2.5rem,5vw,6rem)" }}>
+              We design at the intersection of <span className="italic font-light">craft, code, and consequence.</span>
+            </h2>
+          </Reveal>
+          <div className="grid grid-cols-3 gap-10">
+            {[{ k: "127", v: "Projects shipped" }, { k: "12", v: "Awwwards & FWA" }, { k: "9", v: "Designers in studio" }].map((s) => (
+              <Reveal key={s.k} className="border-t border-ink pt-4">
+                <div className="font-display text-6xl">{s.k}</div>
+                <div className="mt-2 text-[10px] uppercase tracking-[0.25em] text-ink/60">{s.v}</div>
               </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </div>
+    </Panel>
+  );
+}
 
-      {/* PROCESS */}
-      <section id="process" className="px-6 md:px-24 py-32 border-t border-ink">
-        <div className="flex justify-between items-end mb-20">
-          <Reveal>
-            <div className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-3">[ 04 ] Process</div>
-            <h2 className="font-display text-5xl md:text-7xl tracking-tight">How we work.</h2>
-          </Reveal>
+function ServicesPanel() {
+  return (
+    <Panel id="services" dark width="130vw">
+      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+        <div className="mb-12">
+          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
+          <h2 className="font-display text-6xl tracking-tight">What we do.</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-0 border-t border-ink">
+        <div className="flex-1 flex flex-col justify-center">
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.n} delay={i * 50}>
+              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-paper/20 py-5 last:border-b">
+                <div className="col-span-1 font-mono text-xs opacity-60">{s.n}</div>
+                <h3 className="col-span-7 font-display tracking-tight transition-transform duration-500 group-hover:translate-x-3"
+                    style={{ fontSize: "clamp(1.8rem,3.4vw,4rem)" }}>{s.t}</h3>
+                <div className="col-span-3 text-sm opacity-70">{s.d}</div>
+                <div className="col-span-1 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="grid grid-cols-3 gap-0.5">
+                    {Array.from({ length: 9 }).map((_, k) => (<span key={k} className="h-1 w-1 bg-paper" />))}
+                  </div>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+function ProcessPanel() {
+  return (
+    <Panel id="process" width="110vw">
+      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+        <div className="mb-12">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
+          <h2 className="font-display text-6xl tracking-tight">How we work.</h2>
+        </div>
+        <div className="flex-1 grid grid-cols-4 border-t border-ink">
           {PROCESS.map((p, i) => (
-            <Reveal key={p.n} delay={i * 80} className={`border-b border-ink p-8 ${i < 3 ? "md:border-r" : ""} relative group`}>
-              <div className="font-mono text-[11px] tracking-widest text-muted-foreground">{p.n} / 04</div>
-              <h3 className="font-display text-3xl mt-10">{p.t}</h3>
-              <p className="text-sm text-muted-foreground mt-3">{p.d}</p>
+            <Reveal key={p.n} delay={i * 80} className={`p-8 ${i < 3 ? "border-r" : ""} border-ink relative group flex flex-col`}>
+              <div className="font-mono text-[10px] tracking-widest text-ink/60">{p.n} / 04</div>
+              <h3 className="font-display text-4xl mt-auto">{p.t}</h3>
+              <p className="text-sm text-ink/60 mt-3">{p.d}</p>
               <div className="absolute bottom-4 right-4 h-2 w-2 bg-ink opacity-0 group-hover:opacity-100 transition-opacity" />
             </Reveal>
           ))}
         </div>
-      </section>
+      </div>
+    </Panel>
+  );
+}
 
-      {/* TESTIMONIALS */}
-      <section className="px-6 md:px-24 py-32 border-t border-ink">
-        <div className="flex justify-between items-end mb-16">
-          <Reveal>
-            <div className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-3">[ 05 ] Testimonials</div>
-            <h2 className="font-display text-5xl md:text-7xl tracking-tight">In their words.</h2>
-          </Reveal>
+function VoicesPanel() {
+  return (
+    <Panel id="voices" width="140vw">
+      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+        <div className="mb-12">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 06 ] Voices</div>
+          <h2 className="font-display text-6xl tracking-tight">In their words.</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-ink">
+        <div className="flex-1 grid grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.a} delay={i * 100} className={`border-b border-ink p-8 ${i < 2 ? "md:border-r" : ""}`}>
+            <Reveal key={t.a} delay={i * 100} className="border border-ink p-8 flex flex-col justify-between">
               <p className="font-display text-2xl leading-tight tracking-tight">"{t.q}"</p>
-              <div className="mt-10 flex justify-between text-[11px] uppercase tracking-[0.25em]">
+              <div className="mt-10 flex justify-between text-[10px] uppercase tracking-[0.25em]">
                 <span>{t.a}</span>
-                <span className="text-muted-foreground">{t.r}</span>
+                <span className="text-ink/60">{t.r}</span>
               </div>
             </Reveal>
           ))}
         </div>
-      </section>
+      </div>
+    </Panel>
+  );
+}
 
-      {/* FAQ */}
-      <section className="px-6 md:px-24 py-32 border-t border-ink">
-        <div className="grid grid-cols-12 gap-6">
-          <Reveal className="col-span-12 md:col-span-4">
-            <div className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-3">[ 06 ] FAQ</div>
-            <h2 className="font-display text-5xl md:text-6xl tracking-tight">Questions, answered.</h2>
-          </Reveal>
-          <div className="col-span-12 md:col-span-8">
-            {FAQ.map((f, i) => (
-              <Reveal key={f.q} delay={i * 60}>
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full text-left border-t border-ink last:border-b py-6 group"
-                >
-                  <div className="flex justify-between items-center gap-6">
-                    <span className="font-display text-2xl md:text-3xl tracking-tight">{f.q}</span>
-                    <span className="font-mono text-2xl transition-transform" style={{ transform: openFaq === i ? "rotate(45deg)" : "none" }}>+</span>
-                  </div>
-                  <div
-                    className="grid transition-all duration-500"
-                    style={{ gridTemplateRows: openFaq === i ? "1fr" : "0fr", opacity: openFaq === i ? 1 : 0 }}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="text-muted-foreground pt-4 max-w-xl">{f.a}</p>
-                    </div>
-                  </div>
-                </button>
-              </Reveal>
-            ))}
-          </div>
+function ContactPanel() {
+  return (
+    <Panel id="contact" dark width="120vw">
+      <div className="absolute inset-0 pt-20 pb-16 pl-28 pr-20 flex flex-col justify-between">
+        <div>
+          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-6">[ 07 ] Let's build</div>
+          <h2 className="font-display text-balance leading-[0.85] tracking-[-0.05em]" style={{ fontSize: "clamp(4rem,12vw,13rem)" }}>
+            Start a<br />
+            <span className="italic font-light">project →</span>
+          </h2>
         </div>
-      </section>
 
-      {/* FOOTER */}
-      <footer id="contact" className="relative bg-ink text-paper px-6 md:px-24 pt-32 pb-10 overflow-hidden">
-        <div className="absolute inset-0 grid-bg-dark opacity-30" />
-        <div className="relative">
-          <Reveal>
-            <div className="text-[11px] uppercase tracking-[0.3em] opacity-60 mb-6">[ — ] Let's build</div>
-          </Reveal>
-          <Reveal>
-            <h2 className="font-display text-balance text-[clamp(3rem,14vw,14rem)] leading-[0.85] tracking-[-0.05em]">
-              Start a<br />
-              <span className="italic font-light">project →</span>
-            </h2>
-          </Reveal>
-
-          <div className="mt-24 grid grid-cols-12 gap-6 border-t border-paper/20 pt-10">
-            <div className="col-span-12 md:col-span-4">
-              <div className="text-[11px] uppercase tracking-[0.3em] opacity-60 mb-3">Contact</div>
-              <a href="mailto:studio@pixelsandgrid.co" className="block text-xl hover:underline">studio@pixelsandgrid.co</a>
-              <a href="tel:+1" className="block text-xl opacity-70 hover:opacity-100">+1 (212) 555 0144</a>
-            </div>
-            <div className="col-span-6 md:col-span-2">
-              <div className="text-[11px] uppercase tracking-[0.3em] opacity-60 mb-3">Studio</div>
-              <p className="text-sm opacity-70">Lisbon<br />New York<br />Tokyo</p>
-            </div>
-            <div className="col-span-6 md:col-span-3">
-              <div className="text-[11px] uppercase tracking-[0.3em] opacity-60 mb-3">Sitemap</div>
-              <ul className="text-sm space-y-1 opacity-70">
-                <li><a href="#work">Work</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#process">Process</a></li>
-              </ul>
-            </div>
-            <div className="col-span-12 md:col-span-3">
-              <div className="text-[11px] uppercase tracking-[0.3em] opacity-60 mb-3">Social</div>
-              <ul className="text-sm space-y-1 opacity-70">
-                <li><a href="#">Instagram ↗</a></li>
-                <li><a href="#">Are.na ↗</a></li>
-                <li><a href="#">Read.cv ↗</a></li>
-              </ul>
-            </div>
+        <div className="grid grid-cols-12 gap-6 border-t border-paper/20 pt-8">
+          <div className="col-span-4">
+            <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Contact</div>
+            <a href="mailto:studio@pixelsandgrid.co" className="block text-xl hover:underline">studio@pixelsandgrid.co</a>
+            <a href="tel:+1" className="block text-xl opacity-70">+1 (212) 555 0144</a>
           </div>
-
-          <div className="mt-20 flex flex-wrap justify-between text-[10px] uppercase tracking-[0.3em] opacity-50">
+          <div className="col-span-2">
+            <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Studio</div>
+            <p className="text-sm opacity-70">Lisbon<br />New York<br />Tokyo</p>
+          </div>
+          <div className="col-span-3">
+            <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Index</div>
+            <ul className="text-sm space-y-1 opacity-70">
+              <li><a href="#work">Work</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#process">Process</a></li>
+            </ul>
+          </div>
+          <div className="col-span-3">
+            <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Social</div>
+            <ul className="text-sm space-y-1 opacity-70">
+              <li><a href="#">Instagram ↗</a></li>
+              <li><a href="#">Are.na ↗</a></li>
+              <li><a href="#">Read.cv ↗</a></li>
+            </ul>
+          </div>
+          <div className="col-span-12 mt-6 flex justify-between text-[10px] uppercase tracking-[0.3em] opacity-50">
             <span>© MMXXVI Pixels & Grid Studio</span>
             <span>All systems nominal</span>
             <span>v 4.0.1</span>
           </div>
         </div>
-      </footer>
+      </div>
+    </Panel>
+  );
+}
+
+/* ============================== MOBILE ============================== */
+
+function MobileView() {
+  return (
+    <div className="pb-28">
+      <MobileBottomNav />
+
+      {/* HERO */}
+      <section id="intro" className="relative min-h-[100svh] px-5 pt-8 pb-10 flex flex-col">
+        <div className="absolute inset-0 grid-bg-fine opacity-50 pointer-events-none" />
+        <div className="relative flex items-center justify-between text-[10px] uppercase tracking-[0.3em]">
+          <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
+          <span className="opacity-50">MMXXVI</span>
+        </div>
+        <div className="relative flex-1 flex flex-col justify-center py-10">
+          <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-ink/60 mb-6">
+            <span className="h-1.5 w-1.5 bg-ink" /><span>A futurist design studio</span>
+          </div>
+          <h1 className="font-display leading-[0.88] tracking-[-0.04em]" style={{ fontSize: "clamp(3rem,15vw,5.5rem)" }}>
+            Design for<br />the systems<br /><span className="italic font-light">that come next.</span>
+          </h1>
+          <p className="mt-8 text-sm text-ink/70 max-w-[34ch]">
+            Brand, product, and motion experiences for teams reshaping their categories.
+          </p>
+        </div>
+        <div className="relative text-[10px] uppercase tracking-[0.3em] text-ink/50">
+          ← Swipe horizontal galleries · Tap nav below
+        </div>
+      </section>
+
+      {/* WORK — horizontal swipe */}
+      <MobileSection num="02" title="Selected Work" id="work">
+        <div className="-mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-2 scrollbar-none">
+          {WORK.map((w) => (
+            <a key={w.n} href="#" className="snap-start shrink-0 w-[78vw]">
+              <div className={`relative aspect-[4/5] overflow-hidden bg-gradient-to-br ${w.grad}`}>
+                <div className="absolute inset-0 grid-bg-fine opacity-30" />
+                <div className="absolute top-3 left-3 text-[10px] font-mono text-paper mix-blend-difference">{w.n}</div>
+                <div className="absolute top-3 right-3 text-[10px] font-mono text-paper mix-blend-difference">{w.year}</div>
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <div className="font-display text-paper leading-none mix-blend-difference text-4xl">{w.title}</div>
+                  <div className="font-display italic font-light text-paper mix-blend-difference text-2xl">{w.sub}</div>
+                </div>
+              </div>
+              <div className="mt-2 flex justify-between text-[10px] uppercase tracking-[0.25em]">
+                <span>{w.tag}</span><span>↗</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </MobileSection>
+
+      <MobileSection num="03" title="About" id="about">
+        <h3 className="font-display text-3xl leading-tight tracking-tight">
+          We design at the intersection of <span className="italic font-light">craft, code, and consequence.</span>
+        </h3>
+        <div className="mt-8 grid grid-cols-3 gap-4">
+          {[{ k: "127", v: "Shipped" }, { k: "12", v: "Awards" }, { k: "9", v: "Designers" }].map((s) => (
+            <div key={s.k} className="border-t border-ink pt-3">
+              <div className="font-display text-3xl">{s.k}</div>
+              <div className="mt-1 text-[9px] uppercase tracking-[0.25em] text-ink/60">{s.v}</div>
+            </div>
+          ))}
+        </div>
+      </MobileSection>
+
+      {/* SERVICES dark */}
+      <section id="services" className="relative bg-ink text-paper px-5 py-16">
+        <div className="absolute inset-0 grid-bg-dark opacity-40" />
+        <div className="relative">
+          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
+          <h2 className="font-display text-4xl tracking-tight mb-8">What we do.</h2>
+          {SERVICES.map((s) => (
+            <a key={s.n} href="#contact" className="block border-t border-paper/20 py-5 last:border-b">
+              <div className="flex items-baseline gap-4">
+                <span className="font-mono text-xs opacity-60">{s.n}</span>
+                <h3 className="font-display text-3xl tracking-tight">{s.t}</h3>
+              </div>
+              <p className="text-sm opacity-70 mt-2 pl-8">{s.d}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <MobileSection num="05" title="Process" id="process">
+        <div className="space-y-0">
+          {PROCESS.map((p, i) => (
+            <div key={p.n} className={`py-5 ${i < PROCESS.length - 1 ? "border-b border-ink" : ""}`}>
+              <div className="font-mono text-[10px] tracking-widest text-ink/60">{p.n} / 04</div>
+              <h3 className="font-display text-3xl mt-1">{p.t}</h3>
+              <p className="text-sm text-ink/60 mt-1">{p.d}</p>
+            </div>
+          ))}
+        </div>
+      </MobileSection>
+
+      <MobileSection num="06" title="Voices">
+        <div className="-mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-2">
+          {TESTIMONIALS.map((t) => (
+            <div key={t.a} className="snap-start shrink-0 w-[82vw] border border-ink p-6 flex flex-col justify-between min-h-[240px]">
+              <p className="font-display text-xl leading-tight tracking-tight">"{t.q}"</p>
+              <div className="mt-6 flex justify-between text-[10px] uppercase tracking-[0.25em]">
+                <span>{t.a}</span><span className="text-ink/60">{t.r}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </MobileSection>
+
+      {/* CONTACT */}
+      <section id="contact" className="relative bg-ink text-paper px-5 pt-20 pb-12">
+        <div className="absolute inset-0 grid-bg-dark opacity-30" />
+        <div className="relative">
+          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">[ 07 ] Let's build</div>
+          <h2 className="font-display leading-[0.88] tracking-[-0.05em]" style={{ fontSize: "clamp(3.5rem,18vw,7rem)" }}>
+            Start a<br /><span className="italic font-light">project →</span>
+          </h2>
+          <div className="mt-10 border-t border-paper/20 pt-6 space-y-6">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-2">Contact</div>
+              <a href="mailto:studio@pixelsandgrid.co" className="block text-lg">studio@pixelsandgrid.co</a>
+              <a href="tel:+1" className="block text-lg opacity-70">+1 (212) 555 0144</a>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-2">Studio</div>
+                <p className="text-sm opacity-70">Lisbon · NY · Tokyo</p>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-2">Social</div>
+                <p className="text-sm opacity-70">Instagram · Are.na · Read.cv</p>
+              </div>
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.3em] opacity-50 pt-4 border-t border-paper/20">
+              © MMXXVI Pixels & Grid · v 4.0.1
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+  );
+}
+
+function MobileSection({ num, title, id, children }: { num: string; title: string; id?: string; children: React.ReactNode }) {
+  return (
+    <section id={id} className="px-5 py-16 border-t border-ink">
+      <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ {num} ] {title}</div>
+      <h2 className="font-display text-4xl tracking-tight mb-8">{title}.</h2>
+      {children}
+    </section>
   );
 }
