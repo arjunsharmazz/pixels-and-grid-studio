@@ -66,8 +66,8 @@
   @keyframes reveal { to { clip-path: inset(0 0 0 0); } }
   .flicker { animation: flicker 3s steps(2,end) infinite; }
   @keyframes flicker { 0%,97%,100%{opacity:1} 98%{opacity:.4} 99%{opacity:.8} }
-  .grid-drift { animation: drift 18s linear infinite; }
-  @keyframes drift { to { background-position: 80px 80px; } }
+  .grid-drift { animation: drift 12s linear infinite; }
+  @keyframes drift { to { background-position: 32px 32px; } }
 }
 
 /* Display font fallback via Google's Inter Tight as approximation of FK Grotesk Compact */
