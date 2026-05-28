@@ -87,27 +87,6 @@ export function HorizontalCanvas({ children }: { children: React.ReactNode }) {
         </div>
         <span className="opacity-50">Scroll →</span>
       </div>
-      {/* jump nav */}
-      <DesktopRail scrollTo={scrollTo} />
-    </div>
-  );
-}
-
-function DesktopRail({ scrollTo }: { scrollTo: (f: number) => void }) {
-  const items = ["Intro", "Work", "About", "Services", "Process", "Voices", "Contact"];
-  return (
-    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
-      {items.map((it, i) => (
-        <button
-          key={it}
-          onClick={() => scrollTo(i / (items.length - 1))}
-          className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-ink/60 hover:text-ink"
-        >
-          <span className="font-mono">0{i + 1}</span>
-          <span className="h-px w-5 bg-ink/40 group-hover:w-10 group-hover:bg-ink transition-all" />
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity">{it}</span>
-        </button>
-      ))}
     </div>
   );
 }
