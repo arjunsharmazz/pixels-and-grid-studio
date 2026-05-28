@@ -44,15 +44,21 @@
 @layer utilities {
   .grid-bg {
     background-image:
+      linear-gradient(to right, oklch(0 0 0 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0 0 0 / 0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .grid-bg-fine {
+    background-image:
       linear-gradient(to right, oklch(0 0 0 / 0.06) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(0 0 0 / 0.06) 1px, transparent 1px);
-    background-size: 80px 80px;
+    background-size: 24px 24px;
   }
   .grid-bg-dark {
     background-image:
-      linear-gradient(to right, oklch(1 0 0 / 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 0.07) 1px, transparent 1px);
-    background-size: 80px 80px;
+      linear-gradient(to right, oklch(1 0 0 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
   .hairline { border-top: 1px solid var(--border); }
   .text-balance { text-wrap: balance; }
@@ -60,8 +66,8 @@
   @keyframes reveal { to { clip-path: inset(0 0 0 0); } }
   .flicker { animation: flicker 3s steps(2,end) infinite; }
   @keyframes flicker { 0%,97%,100%{opacity:1} 98%{opacity:.4} 99%{opacity:.8} }
-  .grid-drift { animation: drift 18s linear infinite; }
-  @keyframes drift { to { background-position: 80px 80px; } }
+  .grid-drift { animation: drift 12s linear infinite; }
+  @keyframes drift { to { background-position: 32px 32px; } }
 }
 
 /* Display font fallback via Google's Inter Tight as approximation of FK Grotesk Compact */
