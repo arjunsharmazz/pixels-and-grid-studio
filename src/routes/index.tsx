@@ -99,7 +99,7 @@ function Panel({ children, dark = false, width = "100vw", id }: { children: Reac
 
 function IntroPanel() {
   return (
-    <Panel id="intro" width="115vw">
+    <Panel id="intro" width="100vw">
       {/* Top frame */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-14 py-6 text-[10px] uppercase tracking-[0.3em]">
         <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
@@ -108,7 +108,7 @@ function IntroPanel() {
       </div>
 
       {/* Hero grid: 12-col layout, clearly separated zones */}
-      <div className="absolute inset-0 pt-28 pb-20 pl-28 pr-14 grid grid-cols-12 grid-rows-6 gap-x-6">
+      <div className="absolute inset-0 pt-28 pb-20 pl-32 pr-14 grid grid-cols-12 grid-rows-6 gap-x-8">
         {/* meta */}
         <Reveal className="col-span-12 row-span-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-ink/60">
           <span className="h-2 w-2 bg-ink" />
@@ -116,13 +116,14 @@ function IntroPanel() {
           <span className="ml-auto">N 38.72 / W 9.13 — Lisbon</span>
         </Reveal>
 
-        {/* HEADLINE — takes rows 2-5 cols 1-9 */}
-        <h1 className="col-span-12 lg:col-span-9 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
-            style={{ fontSize: "clamp(3rem, 9.5vw, 10rem)" }}>
+        {/* HEADLINE — cols 1-8, leaves 9-12 free for side column */}
+        <h1 className="col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
+            style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}>
           <Reveal as="span" className="block">Design for</Reveal>
           <Reveal as="span" delay={120} className="block">the systems</Reveal>
           <Reveal as="span" delay={240} className="block italic font-light">that come next.</Reveal>
         </h1>
+
 
         {/* SIDE description — separate column, no overlap */}
         <Reveal delay={380} className="hidden lg:flex col-span-3 row-span-4 row-start-2 col-start-10 flex-col justify-end gap-6">
