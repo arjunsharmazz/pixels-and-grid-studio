@@ -7,7 +7,6 @@ import { Reveal } from "@/components/Reveal";
 import { HorizontalCanvas } from "@/components/HorizontalCanvas";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { LayoutGuard } from "@/components/LayoutGuard";
-import { BoxesBackground } from "@/components/BoxesBackground";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/")({
@@ -103,56 +102,52 @@ function Panel({ children, dark = false, width = "100vw", id }: { children: Reac
 function IntroPanel() {
   return (
     <Panel id="intro" width="100vw">
-      {/* Interactive boxes layer — replaces flat grid background */}
-      <BoxesBackground size={56} fade={1600} className="opacity-90" />
-
       {/* Top frame */}
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-14 py-6 text-[10px] uppercase tracking-[0.3em] pointer-events-none z-10">
-        <span className="font-display text-base tracking-tight normal-case pointer-events-auto">Pixels<span className="opacity-40">/</span>Grid</span>
-        <span className="opacity-50">Bulletin № 014 — MMXXVI</span>
-        <a href="#contact" className="border border-ink px-3 py-2 hover:bg-ink hover:text-paper transition-colors pointer-events-auto">Commission a project →</a>
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-14 py-6 text-[10px] uppercase tracking-[0.3em]">
+        <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
+        <span className="opacity-50">Index — MMXXVI</span>
+        <a href="#contact" className="border border-ink px-3 py-2 hover:bg-ink hover:text-paper transition-colors">Start a project →</a>
       </div>
 
       {/* Hero grid: 12-col layout, clearly separated zones */}
-      <div className="absolute inset-0 pt-28 pb-20 pl-32 pr-14 grid grid-cols-12 grid-rows-6 gap-x-8 pointer-events-none z-10">
+      <div className="absolute inset-0 pt-28 pb-20 pl-32 pr-14 grid grid-cols-12 grid-rows-6 gap-x-8">
         {/* meta */}
         <Reveal className="col-span-12 row-span-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-ink/60">
           <span className="h-2 w-2 bg-ink" />
-          <span>Independent studio · Operating since 2019</span>
-          <span className="ml-auto">38.72°N / 9.13°W — Lisbon · Atelier 04</span>
+          <span>A futurist design studio · Est. 2019</span>
+          <span className="ml-auto">N 38.72 / W 9.13 — Lisbon</span>
         </Reveal>
 
         {/* HEADLINE — cols 1-8, leaves 9-12 free for side column */}
         <h1 data-guard="hero-headline" className="col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
             style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}>
-          <Reveal as="span" className="block">Built between</Reveal>
-          <Reveal as="span" delay={120} className="block">the pixel</Reveal>
-          <Reveal as="span" delay={240} className="block italic font-light">and the grid.</Reveal>
+          <Reveal as="span" className="block">Design for</Reveal>
+          <Reveal as="span" delay={120} className="block">the systems</Reveal>
+          <Reveal as="span" delay={240} className="block italic font-light">that come next.</Reveal>
         </h1>
 
 
         {/* SIDE description — separate column, no overlap */}
-        <Reveal delay={380} className="flex col-span-4 row-span-4 row-start-2 col-start-9 flex-col justify-end gap-5 pointer-events-auto">
-          <div data-guard="hero-side" className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Dossier 001 / Practice ]</div>
+        <Reveal delay={380} className="flex col-span-4 row-span-4 row-start-2 col-start-9 flex-col justify-end gap-5">
+          <div data-guard="hero-side" className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Manifest 001 ]</div>
           <p className="text-sm text-ink/80 leading-relaxed">
-            A small studio drawing interfaces, identities, and motion artifacts for founders who treat product as a publication — not a deliverable.
+            An independent studio engineering brands, products, and motion experiences for teams reshaping their categories.
           </p>
           <div className="flex flex-col gap-2">
-            <a href="#work" className="bg-ink text-paper px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:opacity-90">Open the archive →</a>
-            <a href="#contact" className="border border-ink px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:bg-ink hover:text-paper transition-colors">Write to the studio</a>
+            <a href="#work" className="bg-ink text-paper px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:opacity-90">View Work →</a>
+            <a href="#contact" className="border border-ink px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:bg-ink hover:text-paper transition-colors">Get in touch</a>
           </div>
         </Reveal>
 
         {/* bottom bar */}
         <div className="col-span-12 row-span-1 self-end flex justify-between text-[10px] uppercase tracking-[0.3em] text-ink/60">
-          <span className="flex items-center gap-2"><span className="inline-block animate-pulse">→</span> Drag · scroll · drift sideways</span>
-          <span>Identity · Interface · Motion · Editorial</span>
-          <span>Panel 01 / 07</span>
+          <span className="flex items-center gap-2"><span className="inline-block animate-pulse">→</span> Scroll horizontally</span>
+          <span>Brand · Product · Motion · Web</span>
+          <span>01 / 07</span>
         </div>
       </div>
     </Panel>
   );
-
 }
 
 function WorkPanel() {
