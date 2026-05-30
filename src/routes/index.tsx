@@ -119,7 +119,7 @@ function IntroPanel() {
         </Reveal>
 
         {/* HEADLINE — cols 1-8, leaves 9-12 free for side column */}
-        <h1 className="col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
+        <h1 data-guard="hero-headline" className="col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
             style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}>
           <Reveal as="span" className="block">Design for</Reveal>
           <Reveal as="span" delay={120} className="block">the systems</Reveal>
@@ -129,7 +129,7 @@ function IntroPanel() {
 
         {/* SIDE description — separate column, no overlap */}
         <Reveal delay={380} className="flex col-span-4 row-span-4 row-start-2 col-start-9 flex-col justify-end gap-5">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Manifest 001 ]</div>
+          <div data-guard="hero-side" className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Manifest 001 ]</div>
           <p className="text-sm text-ink/80 leading-relaxed">
             An independent studio engineering brands, products, and motion experiences for teams reshaping their categories.
           </p>
