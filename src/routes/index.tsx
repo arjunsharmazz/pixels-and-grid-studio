@@ -157,7 +157,7 @@ function WorkPanel() {
         <div className="flex items-end justify-between mb-12">
           <Reveal>
             <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 02 ] Selected Work</div>
-            <h2 className="font-display text-6xl tracking-tight">Recent projects.</h2>
+            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent projects.</h2>
           </Reveal>
           <span className="text-[10px] uppercase tracking-[0.3em] text-ink/60">2024 — 2025</span>
         </div>
@@ -228,7 +228,7 @@ function ServicesPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
-          <h2 className="font-display text-6xl tracking-tight">What we do.</h2>
+          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we do.</h2>
         </div>
         <div className="flex-1 flex flex-col justify-center">
           {SERVICES.map((s, i) => (
@@ -258,7 +258,7 @@ function ProcessPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
-          <h2 className="font-display text-6xl tracking-tight">How we work.</h2>
+          <h2 data-guard="process-h2" className="font-display text-6xl tracking-tight">How we work.</h2>
         </div>
         <div className="flex-1 grid grid-cols-4 border-t border-ink">
           {PROCESS.map((p, i) => (
@@ -281,7 +281,7 @@ function VoicesPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 06 ] Voices</div>
-          <h2 className="font-display text-6xl tracking-tight">In their words.</h2>
+          <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their words.</h2>
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
