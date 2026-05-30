@@ -62,6 +62,7 @@ function Home() {
       {loading && <Loader onDone={() => setLoading(false)} />}
       {!isMobile && <PixelCursor />}
       {isMobile ? <MobileView /> : <DesktopView />}
+      <LayoutGuard />
     </div>
   );
 }
