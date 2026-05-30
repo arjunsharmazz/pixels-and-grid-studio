@@ -6,6 +6,7 @@ import { SideNav } from "@/components/SideNav";
 import { Reveal } from "@/components/Reveal";
 import { HorizontalCanvas } from "@/components/HorizontalCanvas";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
+import { LayoutGuard } from "@/components/LayoutGuard";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/")({
