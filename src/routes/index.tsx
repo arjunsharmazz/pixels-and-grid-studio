@@ -308,11 +308,13 @@ function ProcessCard({ delay, className, children }: { delay: number; className:
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const target = el.parentElement; // the Reveal root carrying proc-anim
+    if (!target) return;
     const io = new IntersectionObserver(
-      ([entry]) => el.classList.toggle("in-view", entry.isIntersecting && entry.intersectionRatio > 0.15),
-      { threshold: [0, 0.15, 0.5, 1], root: null }
+      ([entry]) => target.classList.toggle("in-view", entry.isIntersecting && entry.intersectionRatio > 0.1),
+      { threshold: [0, 0.1, 0.5, 1], root: null }
     );
-    io.observe(el);
+    io.observe(target);
     return () => io.disconnect();
   }, []);
   return (
