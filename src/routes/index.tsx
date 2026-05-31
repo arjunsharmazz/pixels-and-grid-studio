@@ -37,10 +37,10 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { n: "01", t: "Discover", d: "Audit, research, stakeholder interviews." },
-  { n: "02", t: "Define", d: "Strategy, positioning, creative direction." },
-  { n: "03", t: "Design", d: "Systems, interfaces, identity, motion." },
-  { n: "04", t: "Deliver", d: "Build, launch, iterate, measure." },
+  { n: "01", t: "Discover", it: "listen", d: "Audit, research, stakeholder interviews.", visual: "mesh-discover",   tone: "light" as const },
+  { n: "02", t: "Define",   it: "frame",  d: "Strategy, positioning, creative direction.", visual: "gradient-define", tone: "dark"  as const },
+  { n: "03", t: "Design",   it: "craft",  d: "Systems, interfaces, identity, motion.",     visual: "mesh-design",     tone: "dark"  as const },
+  { n: "04", t: "Deliver",  it: "ship",   d: "Build, launch, iterate, measure.",           visual: "bitmap-deliver",  tone: "dark"  as const },
 ];
 
 const TESTIMONIALS = [
@@ -157,7 +157,7 @@ function WorkPanel() {
         <div className="flex items-end justify-between mb-12">
           <Reveal>
             <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 02 ] Selected Work</div>
-            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent projects.</h2>
+            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent <span className="serif-italic text-7xl">projects.</span></h2>
           </Reveal>
           <span className="text-[10px] uppercase tracking-[0.3em] text-ink/60">2024 — 2025</span>
         </div>
@@ -228,7 +228,7 @@ function ServicesPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
-          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we do.</h2>
+          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we <span className="serif-italic text-7xl">do.</span></h2>
         </div>
         <div className="flex-1 flex flex-col justify-center">
           {SERVICES.map((s, i) => (
@@ -254,26 +254,56 @@ function ServicesPanel() {
 
 function ProcessPanel() {
   return (
-    <Panel id="process" width="110vw">
+    <Panel id="process" width="140vw">
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
-        <div className="mb-12">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
-          <h2 data-guard="process-h2" className="font-display text-6xl tracking-tight">How we work.</h2>
+        <div className="mb-10 flex items-end justify-between">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
+            <h2 data-guard="process-h2" className="font-display text-6xl tracking-tight leading-[0.9]">
+              How we <span className="serif-italic text-7xl">work.</span>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-ink/60 leading-relaxed">
+            A four-act <span className="serif-italic">method</span> — each stage owns a texture, a tempo, and an artifact.
+          </p>
         </div>
-        <div className="flex-1 grid grid-cols-4 border-t border-ink">
-          {PROCESS.map((p, i) => (
-            <Reveal key={p.n} delay={i * 80} className={`p-8 ${i < 3 ? "border-r" : ""} border-ink relative group flex flex-col`}>
-              <div className="font-mono text-[10px] tracking-widest text-ink/60">{p.n} / 04</div>
-              <h3 className="font-display text-4xl mt-auto">{p.t}</h3>
-              <p className="text-sm text-ink/60 mt-3">{p.d}</p>
-              <div className="absolute bottom-4 right-4 h-2 w-2 bg-ink opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Reveal>
-          ))}
+
+        <div className="flex-1 grid grid-cols-4 gap-6">
+          {PROCESS.map((p, i) => {
+            const fg = p.tone === "dark" ? "text-paper" : "text-ink";
+            const sub = p.tone === "dark" ? "text-paper/70" : "text-ink/60";
+            const border = p.tone === "dark" ? "border-paper/20" : "border-ink/20";
+            return (
+              <Reveal key={p.n} delay={i * 90}
+                className={`relative overflow-hidden noise group ${p.visual} ${fg} flex flex-col`}>
+                <div className="relative z-10 flex h-full flex-col p-7">
+                  <div className="flex items-center justify-between">
+                    <span className={`font-mono text-[10px] tracking-widest ${sub}`}>{p.n} / 04</span>
+                    <span className={`serif-italic text-base ${sub}`}>— {p.it}</span>
+                  </div>
+
+                  <div className="mt-auto">
+                    <h3 className="font-display leading-[0.9] tracking-[-0.04em]" style={{ fontSize: "clamp(2.25rem,3.4vw,3.6rem)" }}>
+                      {p.t.slice(0, -2)}<span className="serif-italic">{p.t.slice(-2)}</span>
+                    </h3>
+                    <div className={`mt-5 h-px w-10 ${p.tone === "dark" ? "bg-paper/50" : "bg-ink/50"}`} />
+                    <p className={`mt-4 text-sm leading-relaxed ${sub}`}>{p.d}</p>
+                  </div>
+
+                  <div className={`mt-6 flex items-center justify-between text-[10px] uppercase tracking-[0.25em] ${sub} border-t ${border} pt-3`}>
+                    <span>Phase</span>
+                    <span className="font-mono">·····</span>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </Panel>
   );
 }
+
 
 function VoicesPanel() {
   return (
@@ -281,7 +311,7 @@ function VoicesPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 06 ] Voices</div>
-          <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their words.</h2>
+          <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their <span className="serif-italic text-7xl">words.</span></h2>
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
