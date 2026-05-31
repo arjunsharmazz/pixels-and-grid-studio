@@ -228,7 +228,7 @@ function ServicesPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
-          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we do.</h2>
+          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we <span className="serif-italic text-7xl">do.</span></h2>
         </div>
         <div className="flex-1 flex flex-col justify-center">
           {SERVICES.map((s, i) => (
