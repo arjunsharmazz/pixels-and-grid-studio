@@ -157,7 +157,7 @@ function WorkPanel() {
         <div className="flex items-end justify-between mb-12">
           <Reveal>
             <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 02 ] Selected Work</div>
-            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent projects.</h2>
+            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent <span className="serif-italic text-7xl">projects.</span></h2>
           </Reveal>
           <span className="text-[10px] uppercase tracking-[0.3em] text-ink/60">2024 — 2025</span>
         </div>
