@@ -6,6 +6,7 @@
 
 @theme inline {
   --font-display: "FK Grotesk Roman Compact", "Inter Tight", "Helvetica Neue", sans-serif;
+  --font-serif: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -38,6 +39,12 @@
   html, body { background: var(--color-paper); color: var(--color-ink); }
   body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; font-feature-settings: "ss01","cv11"; }
   h1,h2,h3,h4,.font-display { font-family: var(--font-display); letter-spacing: -0.04em; font-weight: 500; }
+  .font-display.italic, h1 .italic, h2 .italic, h3 .italic, h4 .italic, .font-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
   ::selection { background: var(--ink); color: var(--paper); }
 }
 
@@ -70,5 +77,5 @@
   @keyframes drift { to { background-position: 32px 32px; } }
 }
 
-/* Display font fallback via Google's Inter Tight as approximation of FK Grotesk Compact */
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+/* Display font fallback + editorial serif italic (Instrument Serif) */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap');
