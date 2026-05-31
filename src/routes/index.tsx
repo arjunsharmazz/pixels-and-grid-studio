@@ -254,26 +254,56 @@ function ServicesPanel() {
 
 function ProcessPanel() {
   return (
-    <Panel id="process" width="110vw">
+    <Panel id="process" width="140vw">
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
-        <div className="mb-12">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
-          <h2 data-guard="process-h2" className="font-display text-6xl tracking-tight">How we work.</h2>
+        <div className="mb-10 flex items-end justify-between">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
+            <h2 data-guard="process-h2" className="font-display text-6xl tracking-tight leading-[0.9]">
+              How we <span className="serif-italic text-7xl">work.</span>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-ink/60 leading-relaxed">
+            A four-act <span className="serif-italic">method</span> — each stage owns a texture, a tempo, and an artifact.
+          </p>
         </div>
-        <div className="flex-1 grid grid-cols-4 border-t border-ink">
-          {PROCESS.map((p, i) => (
-            <Reveal key={p.n} delay={i * 80} className={`p-8 ${i < 3 ? "border-r" : ""} border-ink relative group flex flex-col`}>
-              <div className="font-mono text-[10px] tracking-widest text-ink/60">{p.n} / 04</div>
-              <h3 className="font-display text-4xl mt-auto">{p.t}</h3>
-              <p className="text-sm text-ink/60 mt-3">{p.d}</p>
-              <div className="absolute bottom-4 right-4 h-2 w-2 bg-ink opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Reveal>
-          ))}
+
+        <div className="flex-1 grid grid-cols-4 gap-6">
+          {PROCESS.map((p, i) => {
+            const fg = p.tone === "dark" ? "text-paper" : "text-ink";
+            const sub = p.tone === "dark" ? "text-paper/70" : "text-ink/60";
+            const border = p.tone === "dark" ? "border-paper/20" : "border-ink/20";
+            return (
+              <Reveal key={p.n} delay={i * 90}
+                className={`relative overflow-hidden noise group ${p.visual} ${fg} flex flex-col`}>
+                <div className="relative z-10 flex h-full flex-col p-7">
+                  <div className="flex items-center justify-between">
+                    <span className={`font-mono text-[10px] tracking-widest ${sub}`}>{p.n} / 04</span>
+                    <span className={`serif-italic text-base ${sub}`}>— {p.it}</span>
+                  </div>
+
+                  <div className="mt-auto">
+                    <h3 className="font-display leading-[0.9] tracking-[-0.04em]" style={{ fontSize: "clamp(2.25rem,3.4vw,3.6rem)" }}>
+                      {p.t.slice(0, -2)}<span className="serif-italic">{p.t.slice(-2)}</span>
+                    </h3>
+                    <div className={`mt-5 h-px w-10 ${p.tone === "dark" ? "bg-paper/50" : "bg-ink/50"}`} />
+                    <p className={`mt-4 text-sm leading-relaxed ${sub}`}>{p.d}</p>
+                  </div>
+
+                  <div className={`mt-6 flex items-center justify-between text-[10px] uppercase tracking-[0.25em] ${sub} border-t ${border} pt-3`}>
+                    <span>Phase</span>
+                    <span className="font-mono">·····</span>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </Panel>
   );
 }
+
 
 function VoicesPanel() {
   return (
