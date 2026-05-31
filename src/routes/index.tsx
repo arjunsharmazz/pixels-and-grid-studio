@@ -311,7 +311,7 @@ function VoicesPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 06 ] Voices</div>
-          <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their words.</h2>
+          <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their <span className="serif-italic text-7xl">words.</span></h2>
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
