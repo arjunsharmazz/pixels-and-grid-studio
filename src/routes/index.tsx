@@ -37,10 +37,10 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { n: "01", t: "Discover", d: "Audit, research, stakeholder interviews." },
-  { n: "02", t: "Define", d: "Strategy, positioning, creative direction." },
-  { n: "03", t: "Design", d: "Systems, interfaces, identity, motion." },
-  { n: "04", t: "Deliver", d: "Build, launch, iterate, measure." },
+  { n: "01", t: "Discover", it: "listen", d: "Audit, research, stakeholder interviews.", visual: "mesh-discover",   tone: "light" as const },
+  { n: "02", t: "Define",   it: "frame",  d: "Strategy, positioning, creative direction.", visual: "gradient-define", tone: "dark"  as const },
+  { n: "03", t: "Design",   it: "craft",  d: "Systems, interfaces, identity, motion.",     visual: "mesh-design",     tone: "dark"  as const },
+  { n: "04", t: "Deliver",  it: "ship",   d: "Build, launch, iterate, measure.",           visual: "bitmap-deliver",  tone: "dark"  as const },
 ];
 
 const TESTIMONIALS = [
