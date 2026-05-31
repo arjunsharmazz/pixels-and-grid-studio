@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader } from "@/components/Loader";
 import { PixelCursor } from "@/components/PixelCursor";
 import { SideNav } from "@/components/SideNav";
@@ -274,8 +274,7 @@ function ProcessPanel() {
             const sub = p.tone === "dark" ? "text-paper/70" : "text-ink/60";
             const border = p.tone === "dark" ? "border-paper/20" : "border-ink/20";
             return (
-              <Reveal key={p.n} delay={i * 90}
-                className={`relative overflow-hidden noise group ${p.visual} ${fg} flex flex-col`}>
+              <ProcessCard key={p.n} delay={i * 90} className={`${p.visual} ${fg}`}>
                 <div className="relative z-10 flex h-full flex-col p-7">
                   <div className="flex items-center justify-between">
                     <span className={`font-mono text-[10px] tracking-widest ${sub}`}>{p.n} / 04</span>
@@ -295,12 +294,34 @@ function ProcessPanel() {
                     <span className="font-mono">·····</span>
                   </div>
                 </div>
-              </Reveal>
+              </ProcessCard>
             );
           })}
         </div>
       </div>
     </Panel>
+  );
+}
+
+function ProcessCard({ delay, className, children }: { delay: number; className: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const target = el.parentElement; // the Reveal root carrying proc-anim
+    if (!target) return;
+    const io = new IntersectionObserver(
+      ([entry]) => target.classList.toggle("in-view", entry.isIntersecting && entry.intersectionRatio > 0.1),
+      { threshold: [0, 0.1, 0.5, 1], root: null }
+    );
+    io.observe(target);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <Reveal delay={delay} className={`relative overflow-hidden noise group proc-anim flex flex-col ${className}`}>
+      <div ref={ref} className="contents" />
+      {children}
+    </Reveal>
   );
 }
 
