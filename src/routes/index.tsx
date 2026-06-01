@@ -230,22 +230,26 @@ function ServicesPanel() {
   return (
     <Panel id="services" dark width="130vw">
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
-        <div className="mb-12">
-          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
-          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we <span className="serif-italic text-7xl">do.</span></h2>
+        <div className="mb-12 flex items-end justify-between">
+          <div>
+            <div className="eyebrow mb-3 text-[#B9AC9C]">[ 04 ] Services</div>
+            <h2 data-guard="services-h2" className="tracking-tight">What we <span className="serif-italic text-gradient-gold">do.</span></h2>
+          </div>
+          <p className="lead max-w-sm text-[#EDE3D4]/80">A disciplined practice for <span className="italic">brand, product &amp; motion.</span></p>
         </div>
-        <div className="flex-1 flex flex-col justify-center">
+
+        <div className="flex-1 flex flex-col justify-center rounded-2xl bg-cocoa/60 border border-[#3A2F26] shadow-elegant overflow-hidden">
           {SERVICES.map((s, i) => (
             <Reveal key={s.n} delay={i * 50}>
-              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-paper/20 py-5 last:border-b">
-                <div className="col-span-1 font-mono text-xs opacity-60">{s.n}</div>
-                <h3 className="col-span-7 font-display tracking-tight transition-transform duration-500 group-hover:translate-x-3"
-                    style={{ fontSize: "clamp(1.8rem,3.4vw,4rem)" }}>{s.t}</h3>
-                <div className="col-span-3 text-sm opacity-70">{s.d}</div>
-                <div className="col-span-1 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="grid grid-cols-3 gap-0.5">
-                    {Array.from({ length: 9 }).map((_, k) => (<span key={k} className="h-1 w-1 bg-paper" />))}
-                  </div>
+              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 px-8 py-6 border-t border-[#3A2F26] first:border-t-0 transition-colors duration-500 hover:bg-[#1A1410]">
+                <div className="col-span-1 font-mono text-xs text-[#B9AC9C]">{s.n}</div>
+                <h3 className="col-span-7 font-display tracking-tight text-[#EDE3D4] transition-all duration-500 group-hover:translate-x-3 group-hover:text-[#D9BE92]"
+                    style={{ fontSize: "clamp(1.8rem,3.4vw,3.75rem)", fontWeight: 400 }}>
+                  {s.t.split(" ")[0]} <span className="serif-italic">{s.t.split(" ").slice(1).join(" ")}</span>
+                </h3>
+                <div className="col-span-3 text-sm text-[#B9AC9C] leading-relaxed">{s.d}</div>
+                <div className="col-span-1 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="font-mono text-xs text-[#B08B5B] tracking-widest">→</span>
                 </div>
               </a>
             </Reveal>
