@@ -90,14 +90,10 @@ function Panel({ children, dark = false, width = "100vw", id }: { children: Reac
   return (
     <section
       id={id}
-      className={`relative h-screen shrink-0 ${dark ? "bg-espresso text-[#EDE3D4]" : "bg-paper text-ink"}`}
+      className={`relative h-screen shrink-0 ${dark ? "bg-ink text-paper" : "bg-paper text-ink"}`}
       style={{ width }}
     >
-      {dark && (
-        <div className="absolute inset-0 pointer-events-none"
-             style={{ background: "radial-gradient(1200px 600px at 80% 0%, rgba(176,139,91,0.10), transparent 60%), radial-gradient(900px 500px at 0% 100%, rgba(110,42,42,0.12), transparent 60%)" }} />
-      )}
-      <div className={`absolute inset-0 ${dark ? "grid-bg-dark" : "grid-bg-fine"} opacity-50 pointer-events-none`} />
+      <div className={`absolute inset-0 ${dark ? "grid-bg-dark" : "grid-bg-fine"} opacity-60 pointer-events-none`} />
       {children}
     </section>
   );
@@ -230,26 +226,22 @@ function ServicesPanel() {
   return (
     <Panel id="services" dark width="130vw">
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
-        <div className="mb-12 flex items-end justify-between">
-          <div>
-            <div className="eyebrow mb-3 text-[#B9AC9C]">[ 04 ] Services</div>
-            <h2 data-guard="services-h2" className="tracking-tight">What we <span className="serif-italic text-gradient-gold">do.</span></h2>
-          </div>
-          <p className="lead max-w-sm text-[#EDE3D4]/80">A disciplined practice for <span className="italic">brand, product &amp; motion.</span></p>
+        <div className="mb-12">
+          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
+          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we <span className="serif-italic text-7xl">do.</span></h2>
         </div>
-
-        <div className="flex-1 flex flex-col justify-center rounded-2xl bg-cocoa/60 border border-[#3A2F26] shadow-elegant overflow-hidden">
+        <div className="flex-1 flex flex-col justify-center">
           {SERVICES.map((s, i) => (
             <Reveal key={s.n} delay={i * 50}>
-              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 px-8 py-6 border-t border-[#3A2F26] first:border-t-0 transition-colors duration-500 hover:bg-[#1A1410]">
-                <div className="col-span-1 font-mono text-xs text-[#B9AC9C]">{s.n}</div>
-                <h3 className="col-span-7 font-display tracking-tight text-[#EDE3D4] transition-all duration-500 group-hover:translate-x-3 group-hover:text-[#D9BE92]"
-                    style={{ fontSize: "clamp(1.8rem,3.4vw,3.75rem)", fontWeight: 400 }}>
-                  {s.t.split(" ")[0]} <span className="serif-italic">{s.t.split(" ").slice(1).join(" ")}</span>
-                </h3>
-                <div className="col-span-3 text-sm text-[#B9AC9C] leading-relaxed">{s.d}</div>
-                <div className="col-span-1 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="font-mono text-xs text-[#B08B5B] tracking-widest">→</span>
+              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-paper/20 py-5 last:border-b">
+                <div className="col-span-1 font-mono text-xs opacity-60">{s.n}</div>
+                <h3 className="col-span-7 font-display tracking-tight transition-transform duration-500 group-hover:translate-x-3"
+                    style={{ fontSize: "clamp(1.8rem,3.4vw,4rem)" }}>{s.t}</h3>
+                <div className="col-span-3 text-sm opacity-70">{s.d}</div>
+                <div className="col-span-1 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="grid grid-cols-3 gap-0.5">
+                    {Array.from({ length: 9 }).map((_, k) => (<span key={k} className="h-1 w-1 bg-paper" />))}
+                  </div>
                 </div>
               </a>
             </Reveal>
@@ -344,14 +336,11 @@ function VoicesPanel() {
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.a} delay={i * 100} className="lux-card p-8 flex flex-col justify-between">
-              <div>
-                <div className="serif-italic text-gold text-4xl leading-none mb-4">"</div>
-                <p className="font-display text-2xl leading-snug tracking-tight text-ink">{t.q}</p>
-              </div>
-              <div className="mt-10 pt-5 border-t border-[var(--border)] flex justify-between text-[10px] uppercase tracking-[0.25em]">
-                <span className="text-ink">{t.a}</span>
-                <span className="text-[var(--muted-foreground)]">{t.r}</span>
+            <Reveal key={t.a} delay={i * 100} className="border border-ink p-8 flex flex-col justify-between">
+              <p className="font-display text-2xl leading-tight tracking-tight">"{t.q}"</p>
+              <div className="mt-10 flex justify-between text-[10px] uppercase tracking-[0.25em]">
+                <span>{t.a}</span>
+                <span className="text-ink/60">{t.r}</span>
               </div>
             </Reveal>
           ))}
@@ -478,7 +467,7 @@ function MobileView() {
       </MobileSection>
 
       {/* SERVICES dark */}
-      <section id="services" className="relative bg-espresso text-[#EDE3D4] px-5 py-16 rounded-t-2xl">
+      <section id="services" className="relative bg-ink text-paper px-5 py-16">
         <div className="absolute inset-0 grid-bg-dark opacity-40" />
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
@@ -521,7 +510,7 @@ function MobileView() {
       </MobileSection>
 
       {/* CONTACT */}
-      <section id="contact" className="relative bg-espresso text-[#EDE3D4] px-5 pt-20 pb-12">
+      <section id="contact" className="relative bg-ink text-paper px-5 pt-20 pb-12">
         <div className="absolute inset-0 grid-bg-dark opacity-30" />
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">[ 07 ] Let's build</div>
