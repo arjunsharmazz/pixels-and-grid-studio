@@ -344,11 +344,14 @@ function VoicesPanel() {
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.a} delay={i * 100} className="border border-ink p-8 flex flex-col justify-between">
-              <p className="font-display text-2xl leading-tight tracking-tight">"{t.q}"</p>
-              <div className="mt-10 flex justify-between text-[10px] uppercase tracking-[0.25em]">
-                <span>{t.a}</span>
-                <span className="text-ink/60">{t.r}</span>
+            <Reveal key={t.a} delay={i * 100} className="lux-card p-8 flex flex-col justify-between">
+              <div>
+                <div className="serif-italic text-gold text-4xl leading-none mb-4">"</div>
+                <p className="font-display text-2xl leading-snug tracking-tight text-ink">{t.q}</p>
+              </div>
+              <div className="mt-10 pt-5 border-t border-[var(--border)] flex justify-between text-[10px] uppercase tracking-[0.25em]">
+                <span className="text-ink">{t.a}</span>
+                <span className="text-[var(--muted-foreground)]">{t.r}</span>
               </div>
             </Reveal>
           ))}
