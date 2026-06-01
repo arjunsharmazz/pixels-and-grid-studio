@@ -90,10 +90,14 @@ function Panel({ children, dark = false, width = "100vw", id }: { children: Reac
   return (
     <section
       id={id}
-      className={`relative h-screen shrink-0 ${dark ? "bg-ink text-paper" : "bg-paper text-ink"}`}
+      className={`relative h-screen shrink-0 ${dark ? "bg-espresso text-[#EDE3D4]" : "bg-paper text-ink"}`}
       style={{ width }}
     >
-      <div className={`absolute inset-0 ${dark ? "grid-bg-dark" : "grid-bg-fine"} opacity-60 pointer-events-none`} />
+      {dark && (
+        <div className="absolute inset-0 pointer-events-none"
+             style={{ background: "radial-gradient(1200px 600px at 80% 0%, rgba(176,139,91,0.10), transparent 60%), radial-gradient(900px 500px at 0% 100%, rgba(110,42,42,0.12), transparent 60%)" }} />
+      )}
+      <div className={`absolute inset-0 ${dark ? "grid-bg-dark" : "grid-bg-fine"} opacity-50 pointer-events-none`} />
       {children}
     </section>
   );
