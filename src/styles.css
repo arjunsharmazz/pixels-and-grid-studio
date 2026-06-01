@@ -109,24 +109,30 @@
     letter-spacing: 0.005em;
   }
 
-  /* Editorial serif display */
+  /* Editorial serif display — responsive type scale */
   h1, h2, h3, h4, .font-display {
     font-family: var(--font-display);
     color: var(--ink);
     font-weight: 500;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.018em;
     line-height: 1.02;
   }
-  h1 { font-weight: 400; }
+  h1 { font-size: clamp(2.75rem, 7.4vw, 8rem);  font-weight: 400; line-height: 0.92; letter-spacing: -0.035em; }
+  h2 { font-size: clamp(2rem,   4.6vw, 4.75rem); font-weight: 400; line-height: 0.96; letter-spacing: -0.028em; }
+  h3 { font-size: clamp(1.5rem, 2.4vw, 2.25rem); font-weight: 500; line-height: 1.05; }
+  h4 { font-size: clamp(1.125rem, 1.5vw, 1.5rem); font-weight: 500; line-height: 1.15; }
+  p, li { font-size: clamp(0.95rem, 1.02vw, 1.0625rem); line-height: 1.65; }
+  small, .text-small { font-size: 0.8125rem; line-height: 1.55; color: var(--muted-foreground); }
+  .lead { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(1.25rem, 1.9vw, 1.85rem); line-height: 1.3; color: var(--ink); }
 
-  /* Italic accents — the signature luxury move */
+  /* Italic accents — LIGHT weight, the signature luxury move */
   .font-display .italic,
   h1 .italic, h2 .italic, h3 .italic, h4 .italic,
-  em, i, .serif-italic {
+  em, i, .serif-italic, .font-display.italic, .italic {
     font-family: var(--font-display);
     font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-weight: 300; /* light italic */
+    letter-spacing: -0.005em;
   }
 
   /* Inter for UI / labels / micro-type */
