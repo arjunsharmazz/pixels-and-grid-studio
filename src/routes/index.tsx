@@ -478,7 +478,7 @@ function MobileView() {
       </MobileSection>
 
       {/* SERVICES dark */}
-      <section id="services" className="relative bg-ink text-paper px-5 py-16">
+      <section id="services" className="relative bg-espresso text-[#EDE3D4] px-5 py-16 rounded-t-2xl">
         <div className="absolute inset-0 grid-bg-dark opacity-40" />
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
@@ -521,7 +521,7 @@ function MobileView() {
       </MobileSection>
 
       {/* CONTACT */}
-      <section id="contact" className="relative bg-ink text-paper px-5 pt-20 pb-12">
+      <section id="contact" className="relative bg-espresso text-[#EDE3D4] px-5 pt-20 pb-12">
         <div className="absolute inset-0 grid-bg-dark opacity-30" />
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">[ 07 ] Let's build</div>
