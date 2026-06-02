@@ -1,6 +1,6 @@
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -224,6 +224,3 @@
     pointer-events: none;
   }
 }
-
-/* Display font fallback + editorial serif italic (Instrument Serif + Editorial New vibe via Cormorant) */
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&display=swap');
