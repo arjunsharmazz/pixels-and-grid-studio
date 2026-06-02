@@ -40,7 +40,7 @@ export function Loader({ onDone }: { onDone: () => void }) {
 
       {/* center word */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
-        <div className="text-[10px] uppercase tracking-[0.4em] text-ink/50 mb-8">
+        <div className="text-[10px] uppercase tracking-[0.4em] text-[#838383] mb-8">
           [ {String(i + 1).padStart(2, "0")} / {String(WORDS.length).padStart(2, "0")} ]
         </div>
         <div className="relative w-full flex items-center justify-center" style={{ minHeight: "clamp(4rem, 14vw, 12rem)" }}>
@@ -59,10 +59,10 @@ export function Loader({ onDone }: { onDone: () => void }) {
 
         {/* progress bar */}
         <div className="mt-12 w-[min(420px,80vw)]">
-          <div className="h-px w-full bg-ink/15 relative overflow-hidden">
+          <div className="h-px w-full bg-[#DADADA] relative overflow-hidden">
             <div className="absolute inset-y-0 left-0 bg-ink transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
           </div>
-          <div className="mt-2 flex justify-between text-[9px] font-mono uppercase tracking-[0.3em] text-ink/50">
+          <div className="mt-2 flex justify-between text-[9px] font-mono uppercase tracking-[0.3em] text-[#838383]">
             <span>LOAD</span>
             <span>{progress.toString().padStart(3, "0")} / 100</span>
           </div>
@@ -75,7 +75,7 @@ export function Loader({ onDone }: { onDone: () => void }) {
       <Corner pos="bottom-6 left-6" />
       <Corner pos="bottom-6 right-6" flip />
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.4em] text-ink/40">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.4em] text-[#9B9B9B]">
         EST. MMXIX · Lisbon · NY · Tokyo
       </div>
 
@@ -93,8 +93,8 @@ export function Loader({ onDone }: { onDone: () => void }) {
 function Corner({ pos, flip }: { pos: string; flip?: boolean }) {
   return (
     <div className={`absolute ${pos} w-3 h-3 pointer-events-none`}>
-      <div className={`absolute ${flip ? "right-0" : "left-0"} top-0 h-full w-px bg-ink/60`} />
-      <div className={`absolute left-0 ${flip ? "right-0" : ""} top-0 w-full h-px bg-ink/60`} />
+      <div className={`absolute ${flip ? "right-0" : "left-0"} top-0 h-full w-px bg-[#6A6A6A]`} />
+      <div className={`absolute left-0 ${flip ? "right-0" : ""} top-0 w-full h-px bg-[#6A6A6A]`} />
     </div>
   );
 }

@@ -77,9 +77,9 @@ export function HorizontalCanvas({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       {/* progress rail */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-ink/60">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">
         <span className="font-mono tabular-nums">{String(Math.round(progress * 100)).padStart(3, "0")}</span>
-        <div className="h-px w-40 bg-ink/15 relative">
+        <div className="h-px w-40 bg-[#DADADA] relative">
           <div className="absolute inset-y-0 left-0 bg-ink" style={{ width: `${progress * 100}%` }} />
         </div>
         <span className="opacity-50">Scroll →</span>
