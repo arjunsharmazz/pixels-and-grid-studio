@@ -4,10 +4,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   BRAND COLOR SYSTEM (HEX)
+   All colors converted from OKLCH to HEX. Visual style unchanged.
+   ============================================================ */
 @theme inline {
   --font-display: "FK Grotesk Roman Compact", "Inter Tight", "Helvetica Neue", sans-serif;
   --font-serif: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Surfaces */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ink: var(--ink);
@@ -15,24 +21,56 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+
+  /* Buttons */
   --color-primary: var(--ink);
   --color-primary-foreground: var(--paper);
   --color-accent: var(--accent);
 }
 
 :root {
-  --paper: oklch(0.995 0 0);
-  --ink: oklch(0.12 0 0);
-  --background: var(--paper);
-  --foreground: var(--ink);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --border: oklch(0.9 0 0);
-  --accent: oklch(0.55 0.22 27);
+  /* --- Brand Core --- */
+  --brand-primary:        #060606; /* Ink — primary brand / buttons / text */
+  --brand-secondary:      #FDFDFD; /* Paper — secondary surface */
+  --brand-accent:         #D40C1A; /* Signal red — links, highlights */
+  --brand-accent-hover:   #B00914; /* Accent hover/active */
+
+  /* --- Backgrounds --- */
+  --bg-base:              #FDFDFD;
+  --bg-subtle:            #F2F2F2;
+  --bg-inverse:           #060606;
+
+  /* --- Text --- */
+  --text-primary:         #060606;
+  --text-secondary:       #555555;
+  --text-inverse:         #FDFDFD;
+
+  /* --- Borders / Strokes --- */
+  --border-default:       #DEDEDE;
+  --border-strong:        #060606;
+
+  /* --- Button States --- */
+  --btn-bg:               #060606;
+  --btn-bg-hover:         #1F1F1F;
+  --btn-bg-active:        #000000;
+  --btn-fg:               #FDFDFD;
+
+  /* --- Tokens consumed by Tailwind theme --- */
+  --paper:             #FDFDFD;
+  --ink:               #060606;
+  --background:        var(--paper);
+  --foreground:        var(--ink);
+  --muted:             #F2F2F2;
+  --muted-foreground:  #555555;
+  --border:            #DEDEDE;
+  --accent:            #D40C1A;
   --radius: 0;
 }
 
-.dark { --background: var(--ink); --foreground: var(--paper); }
+.dark {
+  --background: var(--ink);
+  --foreground: var(--paper);
+}
 
 @layer base {
   * { border-color: var(--color-border); }
@@ -51,20 +89,20 @@
 @layer utilities {
   .grid-bg {
     background-image:
-      linear-gradient(to right, oklch(0 0 0 / 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0 0 0 / 0.07) 1px, transparent 1px);
+      linear-gradient(to right, rgba(0,0,0,0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.07) 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .grid-bg-fine {
     background-image:
-      linear-gradient(to right, oklch(0 0 0 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0 0 0 / 0.06) 1px, transparent 1px);
+      linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
     background-size: 24px 24px;
   }
   .grid-bg-dark {
     background-image:
-      linear-gradient(to right, oklch(1 0 0 / 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 0.08) 1px, transparent 1px);
+      linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .hairline { border-top: 1px solid var(--border); }
@@ -101,12 +139,12 @@
   }
 
   .mesh-discover {
-    background-color: #f5e9ff;
+    background-color: #F5E9FF;
     background-image:
-      radial-gradient(at 18% 22%, oklch(0.78 0.18 320) 0px, transparent 55%),
-      radial-gradient(at 82% 18%, oklch(0.84 0.14 60)  0px, transparent 50%),
-      radial-gradient(at 24% 84%, oklch(0.80 0.16 200) 0px, transparent 55%),
-      radial-gradient(at 78% 78%, oklch(0.86 0.12 30)  0px, transparent 50%);
+      radial-gradient(at 18% 22%, #E98DFE 0px, transparent 55%),
+      radial-gradient(at 82% 18%, #FFB366 0px, transparent 50%),
+      radial-gradient(at 24% 84%, #00DBE6 0px, transparent 55%),
+      radial-gradient(at 78% 78%, #FFB3A2 0px, transparent 50%);
     filter: saturate(1.1);
     animation-name: mesh-drift;
     animation-duration: 28s;
@@ -114,29 +152,29 @@
   .gradient-define {
     background:
       linear-gradient(135deg,
-        oklch(0.18 0.06 280) 0%,
-        oklch(0.45 0.22 300) 35%,
-        oklch(0.70 0.20 25)  70%,
-        oklch(0.92 0.14 90)  100%);
+        #0D0C2B 0%,
+        #6C1BB9 35%,
+        #FF5F5B 70%,
+        #FFE06D 100%);
     background-size: 260% 260%;
     animation-name: gradient-pan;
     animation-duration: 22s;
   }
   .mesh-design {
-    background-color: #0a0a0a;
+    background-color: #0A0A0A;
     background-image:
-      radial-gradient(circle at 30% 30%, oklch(0.75 0.20 200) 0px, transparent 40%),
-      radial-gradient(circle at 70% 60%, oklch(0.65 0.25 330) 0px, transparent 45%),
-      radial-gradient(circle at 50% 90%, oklch(0.80 0.18 150) 0px, transparent 40%),
-      conic-gradient(from 90deg at 60% 40%, oklch(0.4 0.2 280), oklch(0.2 0.1 320), oklch(0.4 0.2 280));
+      radial-gradient(circle at 30% 30%, #00D0DF 0px, transparent 40%),
+      radial-gradient(circle at 70% 60%, #DC3DD5 0px, transparent 45%),
+      radial-gradient(circle at 50% 90%, #54DD7D 0px, transparent 40%),
+      conic-gradient(from 90deg at 60% 40%, #3D26AE, #280031, #3D26AE);
     animation-name: mesh-drift, mesh-hue;
     animation-duration: 26s, 18s;
   }
   .bitmap-deliver {
-    background-color: #000;
+    background-color: #000000;
     background-image:
-      radial-gradient(oklch(1 0 0) 1px, transparent 1.4px),
-      radial-gradient(oklch(1 0 0 / 0.4) 1px, transparent 1.4px);
+      radial-gradient(#FFFFFF 1px, transparent 1.4px),
+      radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1.4px);
     background-size: 6px 6px, 9px 9px;
     background-position: 0 0, 3px 3px;
     animation-name: bitmap-shimmer;
@@ -175,4 +213,3 @@
 
 /* Display font fallback + editorial serif italic (Instrument Serif + Editorial New vibe via Cormorant) */
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&display=swap');
-
