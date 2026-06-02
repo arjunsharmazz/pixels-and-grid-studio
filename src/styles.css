@@ -55,6 +55,20 @@
   --btn-bg-active:        #000000;
   --btn-fg:               #FDFDFD;
 
+  /* --- Neutral Tint Ramp (Ink over Paper, used in place of opacity) --- */
+  --ink-80:               #383838;
+  --ink-70:               #515151;
+  --ink-60:               #6A6A6A;
+  --ink-50:               #838383;
+  --ink-40:               #9B9B9B;
+  --ink-20:               #CDCDCD;
+  --ink-15:               #DADADA;
+
+  /* --- Paper Tint Ramp (Paper over Ink, for dark surfaces) --- */
+  --paper-70:             #B3B3B3;
+  --paper-50:             #828282;
+  --paper-20:             #373737;
+
   /* --- Tokens consumed by Tailwind theme --- */
   --paper:             #FDFDFD;
   --ink:               #060606;
@@ -89,20 +103,20 @@
 @layer utilities {
   .grid-bg {
     background-image:
-      linear-gradient(to right, rgba(0,0,0,0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0,0,0,0.07) 1px, transparent 1px);
+      linear-gradient(to right, #00000012 1px, transparent 1px),
+      linear-gradient(to bottom, #00000012 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .grid-bg-fine {
     background-image:
-      linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+      linear-gradient(to right, #0000000F 1px, transparent 1px),
+      linear-gradient(to bottom, #0000000F 1px, transparent 1px);
     background-size: 24px 24px;
   }
   .grid-bg-dark {
     background-image:
-      linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+      linear-gradient(to right, #FFFFFF14 1px, transparent 1px),
+      linear-gradient(to bottom, #FFFFFF14 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .hairline { border-top: 1px solid var(--border); }
@@ -174,7 +188,7 @@
     background-color: #000000;
     background-image:
       radial-gradient(#FFFFFF 1px, transparent 1.4px),
-      radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1.4px);
+      radial-gradient(#FFFFFF66 1px, transparent 1.4px);
     background-size: 6px 6px, 9px 9px;
     background-position: 0 0, 3px 3px;
     animation-name: bitmap-shimmer;

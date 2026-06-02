@@ -112,7 +112,7 @@ function IntroPanel() {
       {/* Hero grid: 12-col layout, clearly separated zones */}
       <div className="absolute inset-0 pt-28 pb-20 pl-32 pr-14 grid grid-cols-12 grid-rows-6 gap-x-8">
         {/* meta */}
-        <Reveal className="col-span-12 row-span-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-ink/60">
+        <Reveal className="col-span-12 row-span-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">
           <span className="h-2 w-2 bg-ink" />
           <span>A futurist design studio · Est. 2019</span>
           <span className="ml-auto">N 38.72 / W 9.13 — Lisbon</span>
@@ -129,8 +129,8 @@ function IntroPanel() {
 
         {/* SIDE description — separate column, no overlap */}
         <Reveal delay={380} className="flex col-span-4 row-span-4 row-start-2 col-start-9 flex-col justify-end gap-5">
-          <div data-guard="hero-side" className="text-[10px] uppercase tracking-[0.3em] text-ink/50">[ Manifest 001 ]</div>
-          <p className="text-sm text-ink/80 leading-relaxed">
+          <div data-guard="hero-side" className="text-[10px] uppercase tracking-[0.3em] text-[#838383]">[ Manifest 001 ]</div>
+          <p className="text-sm text-[#383838] leading-relaxed">
             An independent studio engineering brands, products, and motion experiences for teams reshaping their categories.
           </p>
           <div className="flex flex-col gap-2">
@@ -140,7 +140,7 @@ function IntroPanel() {
         </Reveal>
 
         {/* bottom bar */}
-        <div className="col-span-12 row-span-1 self-end flex justify-between text-[10px] uppercase tracking-[0.3em] text-ink/60">
+        <div className="col-span-12 row-span-1 self-end flex justify-between text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">
           <span className="flex items-center gap-2"><span className="inline-block animate-pulse">→</span> Scroll horizontally</span>
           <span>Brand · Product · Motion · Web</span>
           <span>01 / 07</span>
@@ -156,10 +156,10 @@ function WorkPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="flex items-end justify-between mb-12">
           <Reveal>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 02 ] Selected Work</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 02 ] Selected Work</div>
             <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent <span className="serif-italic text-7xl">projects.</span></h2>
           </Reveal>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-ink/60">2024 — 2025</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">2024 — 2025</span>
         </div>
 
         <div className="flex-1 grid grid-cols-4 gap-8">
@@ -197,8 +197,8 @@ function AboutPanel() {
     <Panel id="about" width="120vw">
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 grid grid-cols-12 gap-8">
         <div className="col-span-3">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 03 ] About</div>
-          <p className="text-sm text-ink/70 leading-relaxed max-w-[28ch]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 03 ] About</div>
+          <p className="text-sm text-[#515151] leading-relaxed max-w-[28ch]">
             Nine designers, two writers, four engineers. One discipline: editorial craft applied to interactive systems.
           </p>
         </div>
@@ -212,7 +212,7 @@ function AboutPanel() {
             {[{ k: "127", v: "Projects shipped" }, { k: "12", v: "Awwwards & FWA" }, { k: "9", v: "Designers in studio" }].map((s) => (
               <Reveal key={s.k} className="border-t border-ink pt-4">
                 <div className="font-display text-6xl">{s.k}</div>
-                <div className="mt-2 text-[10px] uppercase tracking-[0.25em] text-ink/60">{s.v}</div>
+                <div className="mt-2 text-[10px] uppercase tracking-[0.25em] text-[#6A6A6A]">{s.v}</div>
               </Reveal>
             ))}
           </div>
@@ -233,7 +233,7 @@ function ServicesPanel() {
         <div className="flex-1 flex flex-col justify-center">
           {SERVICES.map((s, i) => (
             <Reveal key={s.n} delay={i * 50}>
-              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-paper/20 py-5 last:border-b">
+              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-[#373737] py-5 last:border-b">
                 <div className="col-span-1 font-mono text-xs opacity-60">{s.n}</div>
                 <h3 className="col-span-7 font-display tracking-tight transition-transform duration-500 group-hover:translate-x-3"
                     style={{ fontSize: "clamp(1.8rem,3.4vw,4rem)" }}>{s.t}</h3>
@@ -258,12 +258,12 @@ function ProcessPanel() {
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 05 ] Process</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 05 ] Process</div>
             <h2 data-guard="process-h2" className="font-display text-6xl tracking-tight leading-[0.9]">
               How we <span className="serif-italic text-7xl">work.</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm text-ink/60 leading-relaxed">
+          <p className="max-w-xs text-sm text-[#6A6A6A] leading-relaxed">
             A four-act <span className="serif-italic">method</span> — each stage owns a texture, a tempo, and an artifact.
           </p>
         </div>
@@ -271,8 +271,8 @@ function ProcessPanel() {
         <div className="flex-1 grid grid-cols-4 gap-6">
           {PROCESS.map((p, i) => {
             const fg = p.tone === "dark" ? "text-paper" : "text-ink";
-            const sub = p.tone === "dark" ? "text-paper/70" : "text-ink/60";
-            const border = p.tone === "dark" ? "border-paper/20" : "border-ink/20";
+            const sub = p.tone === "dark" ? "text-[#B3B3B3]" : "text-[#6A6A6A]";
+            const border = p.tone === "dark" ? "border-[#373737]" : "border-[#CDCDCD]";
             return (
               <ProcessCard key={p.n} delay={i * 90} className={`${p.visual} ${fg}`}>
                 <div className="relative z-10 flex h-full flex-col p-7">
@@ -285,7 +285,7 @@ function ProcessPanel() {
                     <h3 className="font-display leading-[0.9] tracking-[-0.04em]" style={{ fontSize: "clamp(2.25rem,3.4vw,3.6rem)" }}>
                       {p.t.slice(0, -2)}<span className="serif-italic">{p.t.slice(-2)}</span>
                     </h3>
-                    <div className={`mt-5 h-px w-10 ${p.tone === "dark" ? "bg-paper/50" : "bg-ink/50"}`} />
+                    <div className={`mt-5 h-px w-10 ${p.tone === "dark" ? "bg-[#828282]" : "bg-[#838383]"}`} />
                     <p className={`mt-4 text-sm leading-relaxed ${sub}`}>{p.d}</p>
                   </div>
 
@@ -331,7 +331,7 @@ function VoicesPanel() {
     <Panel id="voices" width="140vw">
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
         <div className="mb-12">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ 06 ] Voices</div>
+          <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 06 ] Voices</div>
           <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their <span className="serif-italic text-7xl">words.</span></h2>
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
@@ -340,7 +340,7 @@ function VoicesPanel() {
               <p className="font-display text-2xl leading-tight tracking-tight">"{t.q}"</p>
               <div className="mt-10 flex justify-between text-[10px] uppercase tracking-[0.25em]">
                 <span>{t.a}</span>
-                <span className="text-ink/60">{t.r}</span>
+                <span className="text-[#6A6A6A]">{t.r}</span>
               </div>
             </Reveal>
           ))}
@@ -362,7 +362,7 @@ function ContactPanel() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-12 gap-6 border-t border-paper/20 pt-8">
+        <div className="grid grid-cols-12 gap-6 border-t border-[#373737] pt-8">
           <div className="col-span-4">
             <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Contact</div>
             <a href="mailto:studio@pixelsandgrid.co" className="block text-xl hover:underline">studio@pixelsandgrid.co</a>
@@ -415,17 +415,17 @@ function MobileView() {
           <span className="opacity-50">MMXXVI</span>
         </div>
         <div className="relative flex-1 flex flex-col justify-center py-10">
-          <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-ink/60 mb-6">
+          <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-6">
             <span className="h-1.5 w-1.5 bg-ink" /><span>A futurist design studio</span>
           </div>
           <h1 className="font-display leading-[0.88] tracking-[-0.04em]" style={{ fontSize: "clamp(3rem,15vw,5.5rem)" }}>
             Design for<br />the systems<br /><span className="italic font-light">that come next.</span>
           </h1>
-          <p className="mt-8 text-sm text-ink/70 max-w-[34ch]">
+          <p className="mt-8 text-sm text-[#515151] max-w-[34ch]">
             Brand, product, and motion experiences for teams reshaping their categories.
           </p>
         </div>
-        <div className="relative text-[10px] uppercase tracking-[0.3em] text-ink/50">
+        <div className="relative text-[10px] uppercase tracking-[0.3em] text-[#838383]">
           ← Swipe horizontal galleries · Tap nav below
         </div>
       </section>
@@ -460,7 +460,7 @@ function MobileView() {
           {[{ k: "127", v: "Shipped" }, { k: "12", v: "Awards" }, { k: "9", v: "Designers" }].map((s) => (
             <div key={s.k} className="border-t border-ink pt-3">
               <div className="font-display text-3xl">{s.k}</div>
-              <div className="mt-1 text-[9px] uppercase tracking-[0.25em] text-ink/60">{s.v}</div>
+              <div className="mt-1 text-[9px] uppercase tracking-[0.25em] text-[#6A6A6A]">{s.v}</div>
             </div>
           ))}
         </div>
@@ -473,7 +473,7 @@ function MobileView() {
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
           <h2 className="font-display text-4xl tracking-tight mb-8">What we do.</h2>
           {SERVICES.map((s) => (
-            <a key={s.n} href="#contact" className="block border-t border-paper/20 py-5 last:border-b">
+            <a key={s.n} href="#contact" className="block border-t border-[#373737] py-5 last:border-b">
               <div className="flex items-baseline gap-4">
                 <span className="font-mono text-xs opacity-60">{s.n}</span>
                 <h3 className="font-display text-3xl tracking-tight">{s.t}</h3>
@@ -488,9 +488,9 @@ function MobileView() {
         <div className="space-y-0">
           {PROCESS.map((p, i) => (
             <div key={p.n} className={`py-5 ${i < PROCESS.length - 1 ? "border-b border-ink" : ""}`}>
-              <div className="font-mono text-[10px] tracking-widest text-ink/60">{p.n} / 04</div>
+              <div className="font-mono text-[10px] tracking-widest text-[#6A6A6A]">{p.n} / 04</div>
               <h3 className="font-display text-3xl mt-1">{p.t}</h3>
-              <p className="text-sm text-ink/60 mt-1">{p.d}</p>
+              <p className="text-sm text-[#6A6A6A] mt-1">{p.d}</p>
             </div>
           ))}
         </div>
@@ -502,7 +502,7 @@ function MobileView() {
             <div key={t.a} className="snap-start shrink-0 w-[82vw] border border-ink p-6 flex flex-col justify-between min-h-[240px]">
               <p className="font-display text-xl leading-tight tracking-tight">"{t.q}"</p>
               <div className="mt-6 flex justify-between text-[10px] uppercase tracking-[0.25em]">
-                <span>{t.a}</span><span className="text-ink/60">{t.r}</span>
+                <span>{t.a}</span><span className="text-[#6A6A6A]">{t.r}</span>
               </div>
             </div>
           ))}
@@ -517,7 +517,7 @@ function MobileView() {
           <h2 className="font-display leading-[0.88] tracking-[-0.05em]" style={{ fontSize: "clamp(3.5rem,18vw,7rem)" }}>
             Start a<br /><span className="italic font-light">project →</span>
           </h2>
-          <div className="mt-10 border-t border-paper/20 pt-6 space-y-6">
+          <div className="mt-10 border-t border-[#373737] pt-6 space-y-6">
             <div>
               <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-2">Contact</div>
               <a href="mailto:studio@pixelsandgrid.co" className="block text-lg">studio@pixelsandgrid.co</a>
@@ -533,7 +533,7 @@ function MobileView() {
                 <p className="text-sm opacity-70">Instagram · Are.na · Read.cv</p>
               </div>
             </div>
-            <div className="text-[10px] uppercase tracking-[0.3em] opacity-50 pt-4 border-t border-paper/20">
+            <div className="text-[10px] uppercase tracking-[0.3em] opacity-50 pt-4 border-t border-[#373737]">
               © MMXXVI Pixels & Grid · v 4.0.1
             </div>
           </div>
@@ -546,7 +546,7 @@ function MobileView() {
 function MobileSection({ num, title, id, children }: { num: string; title: string; id?: string; children: React.ReactNode }) {
   return (
     <section id={id} className="px-5 py-16 border-t border-ink">
-      <div className="text-[10px] uppercase tracking-[0.3em] text-ink/60 mb-3">[ {num} ] {title}</div>
+      <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ {num} ] {title}</div>
       <h2 className="font-display text-4xl tracking-tight mb-8">{title}.</h2>
       {children}
     </section>
