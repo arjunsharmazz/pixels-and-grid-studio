@@ -55,6 +55,20 @@
   --btn-bg-active:        #000000;
   --btn-fg:               #FDFDFD;
 
+  /* --- Neutral Tint Ramp (Ink over Paper, used in place of opacity) --- */
+  --ink-80:               #383838;
+  --ink-70:               #515151;
+  --ink-60:               #6A6A6A;
+  --ink-50:               #838383;
+  --ink-40:               #9B9B9B;
+  --ink-20:               #CDCDCD;
+  --ink-15:               #DADADA;
+
+  /* --- Paper Tint Ramp (Paper over Ink, for dark surfaces) --- */
+  --paper-70:             #B3B3B3;
+  --paper-50:             #828282;
+  --paper-20:             #373737;
+
   /* --- Tokens consumed by Tailwind theme --- */
   --paper:             #FDFDFD;
   --ink:               #060606;
