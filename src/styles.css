@@ -152,6 +152,18 @@
     .proc-anim { animation: none !important; }
   }
 
+  .pixelate-heading,
+  .pixelate-word {
+    display: inline-block;
+    transition: filter .35s ease, transform .35s ease;
+    will-change: filter, transform;
+  }
+  .pixelate-heading.pixelate-active,
+  .pixelate-word.pixelate-active {
+    filter: url(#pixelate-texture);
+    transform: scale(1.01);
+  }
+
   .mesh-discover {
     background-color: #F5E9FF;
     background-image:

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-export function Reveal({ children, delay = 0, as: As = "div", className = "" }: { children: ReactNode; delay?: number; as?: any; className?: string }) {
+export function Reveal({ children, delay = 0, as: As = "div", className = "", ...props }: { children: ReactNode; delay?: number; as?: any; className?: string } & Record<string, unknown>) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
@@ -20,9 +20,10 @@ export function Reveal({ children, delay = 0, as: As = "div", className = "" }: 
       style={{
         opacity: shown ? 1 : 0,
         transform: shown ? "translateY(0) scale(1)" : "translateY(28px) scale(0.98)",
-        filter: shown ? "blur(0)" : "blur(8px)",
+        filter: shown ? undefined : "blur(8px)",
         transition: `opacity .9s ease ${delay}ms, transform .9s cubic-bezier(.7,0,.2,1) ${delay}ms, filter .9s ease ${delay}ms`,
       }}
+      {...props}
     >
       {children}
     </As>

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Loader } from "@/components/Loader";
 import { PixelCursor } from "@/components/PixelCursor";
 import { SideNav } from "@/components/SideNav";
@@ -28,12 +29,19 @@ const WORK = [
   { n: "04", title: "Mono", sub: "Studio", tag: "Editorial · Web", year: "2024", grad: "from-neutral-300 to-neutral-600" },
 ];
 
+const uiVideo = new URL("./videos/ui.mp4", import.meta.url).href;
+
 const SERVICES = [
-  { n: "01", t: "Brand Identity", d: "Marks, systems, guidelines, motion identities." },
-  { n: "02", t: "Digital Product", d: "Interface design, design systems, prototyping." },
-  { n: "03", t: "Web Experiences", d: "Editorial sites, marketing, interactive stories." },
-  { n: "04", t: "Motion & Film", d: "Title sequences, product films, brand motion." },
-  { n: "05", t: "Strategy", d: "Positioning, naming, narrative, voice." },
+  { title: "PRODUCT & GTM", video: uiVideo },
+  { title: "UX UI DESIGN", video: uiVideo },
+  { title: "TRANSFORMATION", video: uiVideo },
+  { title: "TECHNOLOGY", video: uiVideo },
+  { title: "TECHNOLOGY", video: uiVideo },
+  { title: "TECHNOLOGY", video: uiVideo },
+  { title: "TECHNOLOGY", video: uiVideo },
+  { title: "TECHNOLOGY", video: "/videos/technology.mp4" },
+  { title: "TECHNOLOGY", video: "/videos/technology.mp4" },
+  { title: "TECHNOLOGY", video: "/videos/technology.mp4" },
 ];
 
 const PROCESS = [
@@ -100,8 +108,38 @@ function Panel({ children, dark = false, width = "100vw", id }: { children: Reac
 }
 
 function IntroPanel() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const turbulenceRef = useRef<SVGFETurbulenceElement | null>(null);
+  const [activeWord, setActiveWord] = useState<number | null>(null);
+
+  const activateWord = (index: number) => {
+    const turbulence = turbulenceRef.current;
+    if (turbulence) turbulence.setAttribute("seed", `${Math.floor(Math.random() * 1000)}`);
+    setActiveWord(index);
+  };
+
+  const resetWord = () => setActiveWord(null);
+
   return (
     <Panel id="intro" width="100vw">
+      <svg width="0" height="0" aria-hidden="true" className="absolute">
+        <filter id="pixelate-texture" x="0" y="0" width="100%" height="100%" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
+          <feTurbulence
+            ref={turbulenceRef}
+            type="fractalNoise"
+            baseFrequency="0.02"
+            numOctaves="1"
+            seed="0"
+            result="noise"
+          />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+          <feComponentTransfer>
+            <feFuncR type="discrete" tableValues="0 1" />
+            <feFuncG type="discrete" tableValues="0 1" />
+            <feFuncB type="discrete" tableValues="0 1" />
+          </feComponentTransfer>
+        </filter>
+      </svg>
       {/* Top frame */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-14 py-6 text-[10px] uppercase tracking-[0.3em]">
         <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
@@ -115,15 +153,54 @@ function IntroPanel() {
         <Reveal className="col-span-12 row-span-1 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">
           <span className="h-2 w-2 bg-ink" />
           <span>A futurist design studio · Est. 2019</span>
-          <span className="ml-auto">N 38.72 / W 9.13 — Lisbon</span>
+          {/* <span className="ml-auto">N 38.72 / W 9.13 — Lisbon</span> */}
         </Reveal>
 
         {/* HEADLINE — cols 1-8, leaves 9-12 free for side column */}
-        <h1 data-guard="hero-headline" className="col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
-            style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}>
-          <Reveal as="span" className="block">Design for</Reveal>
-          <Reveal as="span" delay={120} className="block">the systems</Reveal>
-          <Reveal as="span" delay={240} className="block italic font-light">that come next.</Reveal>
+        <h1
+          ref={headingRef}
+          data-guard="hero-headline"
+          className="pixelate-heading col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
+          style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}
+        >
+          <Reveal
+            as="span"
+            className={`block pixelate-word${activeWord === 0 ? " pixelate-active" : ""}`}
+            onPointerEnter={() => activateWord(0)}
+            onPointerLeave={resetWord}
+            onPointerDown={() => activateWord(0)}
+            onPointerUp={resetWord}
+            onPointerCancel={resetWord}
+            onTouchEnd={resetWord}
+          >
+            Design for
+          </Reveal>
+          <Reveal
+            as="span"
+            delay={120}
+            className={`block pixelate-word${activeWord === 1 ? " pixelate-active" : ""}`}
+            onPointerEnter={() => activateWord(1)}
+            onPointerLeave={resetWord}
+            onPointerDown={() => activateWord(1)}
+            onPointerUp={resetWord}
+            onPointerCancel={resetWord}
+            onTouchEnd={resetWord}
+          >
+            the systems
+          </Reveal>
+          <Reveal
+            as="span"
+            delay={240}
+            className={`block pixelate-word italic font-light${activeWord === 2 ? " pixelate-active" : ""}`}
+            onPointerEnter={() => activateWord(2)}
+            onPointerLeave={resetWord}
+            onPointerDown={() => activateWord(2)}
+            onPointerUp={resetWord}
+            onPointerCancel={resetWord}
+            onTouchEnd={resetWord}
+          >
+            that come next.
+          </Reveal>
         </h1>
 
 
@@ -142,7 +219,7 @@ function IntroPanel() {
         {/* bottom bar */}
         <div className="col-span-12 row-span-1 self-end flex justify-between text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">
           <span className="flex items-center gap-2"><span className="inline-block animate-pulse">→</span> Scroll horizontally</span>
-          <span>Brand · Product · Motion · Web</span>
+          {/* <span>Brand · Product · Motion · Web</span> */}
           <span>01 / 07</span>
         </div>
       </div>
@@ -152,34 +229,34 @@ function IntroPanel() {
 
 function WorkPanel() {
   return (
-    <Panel id="work" width="180vw">
-      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
-        <div className="flex items-end justify-between mb-12">
+    <Panel id="work" width="100vw">
+      <div className="absolute inset-0 pt-20 pb-28 pl-28 pr-20 flex flex-col" style={{ backgroundColor: '', color: '#0A0A0A' }}>
+        <div className="flex items-end justify-between mb-6">
           <Reveal>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 02 ] Selected Work</div>
-            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight">Recent <span className="serif-italic text-7xl">projects.</span></h2>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-[#000000] mb-3">[ 02 ] Selected Work</div>
+            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight text-black">Recent <span className="serif-italic text-7xl">projects.</span></h2>
           </Reveal>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">2024 — 2025</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#CFCFCF]">2024 — 2025</span>
         </div>
 
-        <div className="flex-1 grid grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
           {WORK.map((w, idx) => (
             <Reveal key={w.n} delay={idx * 80} className="flex flex-col group">
-              <a href="#" className="block">
-                <div className={`relative aspect-[3/4] overflow-hidden bg-gradient-to-br ${w.grad}`}>
-                  <div className="absolute inset-0 grid-bg-fine opacity-40 group-hover:opacity-70 transition-opacity duration-700" />
-                  <div className="absolute top-4 left-4 text-[10px] font-mono uppercase tracking-widest text-paper mix-blend-difference">{w.n}</div>
-                  <div className="absolute top-4 right-4 text-[10px] font-mono uppercase tracking-widest text-paper mix-blend-difference">{w.year}</div>
-                  <div className="absolute inset-x-0 bottom-0 p-5 transition-transform duration-700 group-hover:-translate-y-2">
-                    <div className="font-display text-paper leading-none mix-blend-difference" style={{ fontSize: "clamp(2rem,3.5vw,4rem)" }}>
+              <a href="#" className="block border border-transparent overflow-hidden transform transition-transform duration-300 group-hover:scale-105 group-hover:border-[#ffffff]">
+                <div className="relative aspect-[3/4] overflow-hidden bg-[#00000077]">
+                  <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
+                  <div className="absolute top-4 left-4 text-[10px] font-mono uppercase tracking-widest text-[#D4AF37]">{w.n}</div>
+                  <div className="absolute top-4 right-4 text-[10px] font-mono uppercase tracking-widest text-[#D4AF37]">{w.year}</div>
+                  <div className="absolute inset-x-0 bottom-0 p-5 transition-transform duration-300 group-hover:-translate-y-2">
+                    <div className="font-display text-white leading-none" style={{ fontSize: "clamp(2rem,3.5vw,4rem)" }}>
                       {w.title}
                     </div>
-                    <div className="font-display italic font-light text-paper leading-none mix-blend-difference opacity-80" style={{ fontSize: "clamp(1.4rem,2.4vw,2.6rem)" }}>
+                    <div className="font-display italic font-light text-white leading-none opacity-80" style={{ fontSize: "clamp(1.4rem,2.4vw,2.6rem)" }}>
                       {w.sub}
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 flex justify-between text-[10px] uppercase tracking-[0.25em]">
+                <div className="mt-4 flex justify-between text-[10px] uppercase tracking-[0.25em] text-[#CFCFCF]">
                   <span>{w.tag}</span>
                   <span className="group-hover:translate-x-1 transition-transform">View ↗</span>
                 </div>
@@ -223,29 +300,81 @@ function AboutPanel() {
 }
 
 function ServicesPanel() {
-  return (
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+
+  return (  
     <Panel id="services" dark width="130vw">
+      <div className="absolute inset-0 " />
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
-        <div className="mb-12">
-          <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
-          <h2 data-guard="services-h2" className="font-display text-6xl tracking-tight">What we <span className="serif-italic text-7xl">do.</span></h2>
+        <div className="mb-12 text-center">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-[#D4AF37] opacity-80 mb-3">[ 04 ] Services</div>
+          <h2
+            data-guard="services-h2"
+            className="mx-auto max-w-4xl font-display uppercase tracking-tight text-white"
+            style={{ fontSize: "clamp(3rem,6vw,5.5rem)" }}
+          >
+            What we <span className="serif-italic text-[#D4AF37]">craft.</span>
+          </h2>
         </div>
-        <div className="flex-1 flex flex-col justify-center">
-          {SERVICES.map((s, i) => (
-            <Reveal key={s.n} delay={i * 50}>
-              <a href="#contact" className="group grid grid-cols-12 items-center gap-6 border-t border-[#373737] py-5 last:border-b">
-                <div className="col-span-1 font-mono text-xs opacity-60">{s.n}</div>
-                <h3 className="col-span-7 font-display tracking-tight transition-transform duration-500 group-hover:translate-x-3"
-                    style={{ fontSize: "clamp(1.8rem,3.4vw,4rem)" }}>{s.t}</h3>
-                <div className="col-span-3 text-sm opacity-70">{s.d}</div>
-                <div className="col-span-1 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="grid grid-cols-3 gap-0.5">
-                    {Array.from({ length: 9 }).map((_, k) => (<span key={k} className="h-1 w-1 bg-paper" />))}
-                  </div>
-                </div>
-              </a>
-            </Reveal>
-          ))}
+
+        <div className="relative flex-1 flex flex-col justify-center items-center gap-6">
+          {SERVICES.map((service, index) => {
+            const active = hoverIndex === index;
+            const itemOpacity = hoverIndex === null ? 1 : active ? 1 : 0.2;
+            const fontWeight = active ? 700 : 500;
+
+            return (
+              <div key={service.title} className="relative inline-block text-center">
+                <motion.a
+                  href="#contact"
+                  className="inline-block"
+                  onPointerEnter={() => setHoverIndex(index)}
+                  onPointerLeave={() => setHoverIndex(null)}
+                  onFocus={() => setHoverIndex(index)}
+                  onBlur={() => setHoverIndex(null)}
+                  animate={{ scale: active ? 1.02 : 1, opacity: itemOpacity }}
+                  transition={{ type: "spring", stiffness: 260, damping: 24, duration: 0.3 }}
+                  style={{ color: "#FFFFFF" }}
+                >
+                  <span
+                    className="font-display uppercase tracking-tight leading-tight"
+                    style={{ fontSize: "clamp(3rem,7vw,5.5rem)", fontWeight }}
+                  >
+                    {service.title}
+                  </span>
+                </motion.a>
+
+                <AnimatePresence>
+                  {active && (
+                    <motion.div
+                      className="pointer-events-none absolute left-1/2 bottom-full mb-4 z-50 rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.45)] w-[240px] lg:w-[300px]"
+                      initial={{ opacity: 0, scale: 0.95, y: 16 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: 16 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      style={{ transform: "translateX(-50%)" }}
+                    >
+                      <div className="bg-[#111] px-4 py-3 text-left">
+                        <div className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">Preview</div>
+                        <div className="mt-2 font-display text-sm uppercase tracking-tight text-white">{service.title}</div>
+                      </div>
+                      <div className="h-[140px] lg:h-[180px] bg-black">
+                        <video
+                          src={service.video}
+                          className="w-full h-full object-cover"
+                          autoPlay
+                          playsInline
+                          muted
+                          loop
+                          preload="none"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Panel>
@@ -403,12 +532,42 @@ function ContactPanel() {
 /* ============================== MOBILE ============================== */
 
 function MobileView() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const turbulenceRef = useRef<SVGFETurbulenceElement | null>(null);
+  const [activeWord, setActiveWord] = useState<number | null>(null);
+
+  const activateWord = (index: number) => {
+    const turbulence = turbulenceRef.current;
+    if (turbulence) turbulence.setAttribute("seed", `${Math.floor(Math.random() * 1000)}`);
+    setActiveWord(index);
+  };
+
+  const resetWord = () => setActiveWord(null);
+
   return (
     <div className="pb-28">
       <MobileBottomNav />
 
       {/* HERO */}
       <section id="intro" className="relative min-h-[100svh] px-5 pt-8 pb-10 flex flex-col">
+        <svg width="0" height="0" aria-hidden="true" className="absolute">
+          <filter id="pixelate-texture" x="0" y="0" width="100%" height="100%" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
+            <feTurbulence
+              ref={turbulenceRef}
+              type="fractalNoise"
+              baseFrequency="0.02"
+              numOctaves="1"
+              seed="0"
+              result="noise"
+            />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+            <feComponentTransfer>
+              <feFuncR type="discrete" tableValues="0 1" />
+              <feFuncG type="discrete" tableValues="0 1" />
+              <feFuncB type="discrete" tableValues="0 1" />
+            </feComponentTransfer>
+          </filter>
+        </svg>
         <div className="absolute inset-0 grid-bg-fine opacity-50 pointer-events-none" />
         <div className="relative flex items-center justify-between text-[10px] uppercase tracking-[0.3em]">
           <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
@@ -418,8 +577,44 @@ function MobileView() {
           <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-6">
             <span className="h-1.5 w-1.5 bg-ink" /><span>A futurist design studio</span>
           </div>
-          <h1 className="font-display leading-[0.88] tracking-[-0.04em]" style={{ fontSize: "clamp(3rem,15vw,5.5rem)" }}>
-            Design for<br />the systems<br /><span className="italic font-light">that come next.</span>
+          <h1
+            ref={headingRef}
+            className="pixelate-heading font-display leading-[0.88] tracking-[-0.04em]"
+            style={{ fontSize: "clamp(3rem,15vw,5.5rem)" }}
+          >
+            <span
+              className={`pixelate-word block${activeWord === 0 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(0)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(0)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              Design for
+            </span>
+            <span
+              className={`pixelate-word block${activeWord === 1 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(1)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(1)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              the systems
+            </span>
+            <span
+              className={`pixelate-word block italic font-light${activeWord === 2 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(2)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(2)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              that come next.
+            </span>
           </h1>
           <p className="mt-8 text-sm text-[#515151] max-w-[34ch]">
             Brand, product, and motion experiences for teams reshaping their categories.
@@ -472,13 +667,12 @@ function MobileView() {
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
           <h2 className="font-display text-4xl tracking-tight mb-8">What we do.</h2>
-          {SERVICES.map((s) => (
-            <a key={s.n} href="#contact" className="block border-t border-[#373737] py-5 last:border-b">
+          {SERVICES.map((s, idx) => (
+            <a key={s.title} href="#contact" className="block border-t border-[#373737] py-5 last:border-b">
               <div className="flex items-baseline gap-4">
-                <span className="font-mono text-xs opacity-60">{s.n}</span>
-                <h3 className="font-display text-3xl tracking-tight">{s.t}</h3>
+                <span className="font-mono text-xs opacity-60">{String(idx + 1).padStart(2, "0")}</span>
+                <h3 className="font-display text-3xl tracking-tight">{s.title}</h3>
               </div>
-              <p className="text-sm opacity-70 mt-2 pl-8">{s.d}</p>
             </a>
           ))}
         </div>
