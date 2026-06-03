@@ -74,7 +74,7 @@ export function LayoutGuard({ gridSize = 32 }: { gridSize?: number }) {
           if (area > 0) v.push({ kind: "overlap", a: rects[i].id, b: rects[j].id, area });
         }
       }
-
+//mbhkabbcbbkcbk
       const now = performance.now();
       if (now - lastFlush > 250) {
         lastFlush = now;
