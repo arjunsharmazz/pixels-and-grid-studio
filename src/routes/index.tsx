@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader } from "@/components/Loader";
 import { PixelCursor } from "@/components/PixelCursor";
-import { SideNav } from "@/components/SideNav";
+import { TopNav } from "@/components/TopNav";
 import { Reveal } from "@/components/Reveal";
 import { HorizontalCanvas } from "@/components/HorizontalCanvas";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { LayoutGuard } from "@/components/LayoutGuard";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,16 +40,16 @@ const SERVICES = [
   { title: "TECHNOLOGY", video: uiVideo },
   { title: "TECHNOLOGY", video: uiVideo },
   { title: "TECHNOLOGY", video: uiVideo },
-  { title: "TECHNOLOGY", video: "/videos/technology.mp4" },
-  { title: "TECHNOLOGY", video: "/videos/technology.mp4" },
-  { title: "TECHNOLOGY", video: "/videos/technology.mp4" },
+  { title: "TECHNOLOGY", video: uiVideo },
+  { title: "TECHNOLOGY", video: uiVideo },
+  { title: "TECHNOLOGY", video: uiVideo },
 ];
 
 const PROCESS = [
-  { n: "01", t: "Discover", it: "listen", d: "Audit, research, stakeholder interviews.", visual: "mesh-discover",   tone: "light" as const },
-  { n: "02", t: "Define",   it: "frame",  d: "Strategy, positioning, creative direction.", visual: "gradient-define", tone: "dark"  as const },
-  { n: "03", t: "Design",   it: "craft",  d: "Systems, interfaces, identity, motion.",     visual: "mesh-design",     tone: "dark"  as const },
-  { n: "04", t: "Deliver",  it: "ship",   d: "Build, launch, iterate, measure.",           visual: "bitmap-deliver",  tone: "dark"  as const },
+  { n: "01", t: "Discover", it: "listen", d: "Audit, research, stakeholder interviews.", visual: "mesh-discover", tone: "light" as const },
+  { n: "02", t: "Define", it: "frame", d: "Strategy, positioning, creative direction.", visual: "gradient-define", tone: "dark" as const },
+  { n: "03", t: "Design", it: "craft", d: "Systems, interfaces, identity, motion.", visual: "mesh-design", tone: "dark" as const },
+  { n: "04", t: "Deliver", it: "ship", d: "Build, launch, iterate, measure.", visual: "bitmap-deliver", tone: "dark" as const },
 ];
 
 const TESTIMONIALS = [
@@ -80,7 +81,7 @@ function Home() {
 function DesktopView() {
   return (
     <>
-      <SideNav />
+      <TopNav />
       <HorizontalCanvas>
         <IntroPanel />
         <WorkPanel />
@@ -140,12 +141,7 @@ function IntroPanel() {
           </feComponentTransfer>
         </filter>
       </svg>
-      {/* Top frame */}
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-14 py-6 text-[10px] uppercase tracking-[0.3em]">
-        <span className="font-display text-base tracking-tight normal-case">Pixels<span className="opacity-40">/</span>Grid</span>
-        <span className="opacity-50">Index — MMXXVI</span>
-        <a href="#contact" className="border border-ink px-3 py-2 hover:bg-ink hover:text-paper transition-colors">Start a project →</a>
-      </div>
+
 
       {/* Hero grid: 12-col layout, clearly separated zones */}
       <div className="absolute inset-0 pt-28 pb-20 pl-32 pr-14 grid grid-cols-12 grid-rows-6 gap-x-8">
@@ -163,43 +159,93 @@ function IntroPanel() {
           className="pixelate-heading col-span-8 row-span-4 font-display text-balance leading-[0.86] tracking-[-0.05em] self-center"
           style={{ fontSize: "clamp(2.5rem, 7.5vw, 8rem)" }}
         >
-          <Reveal
-            as="span"
-            className={`block pixelate-word${activeWord === 0 ? " pixelate-active" : ""}`}
-            onPointerEnter={() => activateWord(0)}
-            onPointerLeave={resetWord}
-            onPointerDown={() => activateWord(0)}
-            onPointerUp={resetWord}
-            onPointerCancel={resetWord}
-            onTouchEnd={resetWord}
-          >
-            Design for
+          <Reveal as="span" className="block">
+            <span
+              className={`pixelate-word${activeWord === 0 ? " pixelate-active" : ""}`}
+              style={{ fontFamily: "'Pixelify Sans'" }}
+              onPointerEnter={() => activateWord(0)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(0)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              Design
+            </span>
+            {" "}
+            <span
+              className={`pixelate-word${activeWord === 1 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(1)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(1)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              for
+            </span>
           </Reveal>
-          <Reveal
-            as="span"
-            delay={120}
-            className={`block pixelate-word${activeWord === 1 ? " pixelate-active" : ""}`}
-            onPointerEnter={() => activateWord(1)}
-            onPointerLeave={resetWord}
-            onPointerDown={() => activateWord(1)}
-            onPointerUp={resetWord}
-            onPointerCancel={resetWord}
-            onTouchEnd={resetWord}
-          >
-            the systems
+          <Reveal as="span" delay={120} className="block">
+            <span
+              className={`pixelate-word${activeWord === 2 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(2)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(2)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              the
+            </span>
+            {" "}
+            <span
+              className={`pixelate-word${activeWord === 3 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(3)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(3)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              systems
+            </span>
           </Reveal>
-          <Reveal
-            as="span"
-            delay={240}
-            className={`block pixelate-word italic font-light${activeWord === 2 ? " pixelate-active" : ""}`}
-            onPointerEnter={() => activateWord(2)}
-            onPointerLeave={resetWord}
-            onPointerDown={() => activateWord(2)}
-            onPointerUp={resetWord}
-            onPointerCancel={resetWord}
-            onTouchEnd={resetWord}
-          >
-            that come next.
+          <Reveal as="span" delay={240} className="block italic" style={{ fontFamily: "'Advent Pro'", fontWeight: 100 }}>
+            <span
+              className={`pixelate-word${activeWord === 4 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(4)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(4)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              that
+            </span>
+            {" "}
+            <span
+              className={`pixelate-word${activeWord === 5 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(5)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(5)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              come
+            </span>
+            {" "}
+            <span
+              className={`pixelate-word${activeWord === 6 ? " pixelate-active" : ""}`}
+              onPointerEnter={() => activateWord(6)}
+              onPointerLeave={resetWord}
+              onPointerDown={() => activateWord(6)}
+              onPointerUp={resetWord}
+              onPointerCancel={resetWord}
+              onTouchEnd={resetWord}
+            >
+              next.
+            </span>
           </Reveal>
         </h1>
 
@@ -220,7 +266,7 @@ function IntroPanel() {
         <div className="col-span-12 row-span-1 self-end flex justify-between text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A]">
           <span className="flex items-center gap-2"><span className="inline-block animate-pulse">→</span> Scroll horizontally</span>
           {/* <span>Brand · Product · Motion · Web</span> */}
-          <span>01 / 07</span>
+          {/* <span>01 / 07</span> */}
         </div>
       </div>
     </Panel>
@@ -230,41 +276,103 @@ function IntroPanel() {
 function WorkPanel() {
   return (
     <Panel id="work" width="100vw">
-      <div className="absolute inset-0 pt-20 pb-28 pl-28 pr-20 flex flex-col" style={{ backgroundColor: '', color: '#0A0A0A' }}>
-        <div className="flex items-end justify-between mb-6">
-          <Reveal>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-[#000000] mb-3">[ 02 ] Selected Work</div>
-            <h2 data-guard="work-h2" className="font-display text-6xl tracking-tight text-black">Recent <span className="serif-italic text-7xl">projects.</span></h2>
-          </Reveal>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#CFCFCF]">2024 — 2025</span>
-        </div>
+      <section className="w-screen h-screen bg-black overflow-hidden">
+        <div className="h-full flex flex-col px-12 lg:px-16 py-12">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
-          {WORK.map((w, idx) => (
-            <Reveal key={w.n} delay={idx * 80} className="flex flex-col group">
-              <a href="#" className="block border border-transparent overflow-hidden transform transition-transform duration-300 group-hover:scale-105 group-hover:border-[#ffffff]">
-                <div className="relative aspect-[3/4] overflow-hidden bg-[#00000077]">
-                  <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
-                  <div className="absolute top-4 left-4 text-[10px] font-mono uppercase tracking-widest text-[#D4AF37]">{w.n}</div>
-                  <div className="absolute top-4 right-4 text-[10px] font-mono uppercase tracking-widest text-[#D4AF37]">{w.year}</div>
-                  <div className="absolute inset-x-0 bottom-0 p-5 transition-transform duration-300 group-hover:-translate-y-2">
-                    <div className="font-display text-white leading-none" style={{ fontSize: "clamp(2rem,3.5vw,4rem)" }}>
-                      {w.title}
-                    </div>
-                    <div className="font-display italic font-light text-white leading-none opacity-80" style={{ fontSize: "clamp(1.4rem,2.4vw,2.6rem)" }}>
-                      {w.sub}
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4 flex justify-between text-[10px] uppercase tracking-[0.25em] text-[#CFCFCF]">
-                  <span>{w.tag}</span>
-                  <span className="group-hover:translate-x-1 transition-transform">View ↗</span>
-                </div>
-              </a>
+          {/* Header */}
+          <div className="flex items-end justify-between mb-10 shrink-0">
+            <Reveal>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-[#7a7a7a] mb-4">
+                [ 02 ] Selected Work
+              </div>
+
+              <h2 className="font-display text-white leading-none tracking-tight text-[clamp(3rem,5vw,5rem)]">
+                Recent projects.
+              </h2>
             </Reveal>
-          ))}
+
+
+          </div>
+
+          {/* Filter */}
+          <div className="flex justify-end gap-8 mb-8 shrink-0 text-[10px] uppercase tracking-[0.25em] text-[#666]">
+            <button className="text-white">Branding</button>
+            <button>UI/UX</button>
+            <button>Video Editing</button>
+            <button>Motion Graphics</button>
+            <button>Social Media Post</button>
+          </div>
+
+          {/* Cards Area */}
+          <div className="flex-1 min-h-0">
+            <div className="grid h-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+              {WORK.slice(0, 3).map((w, idx) => (
+                <Reveal
+                  key={w.n}
+                  delay={idx * 100}
+                  className="flex flex-col h-full group"
+                >
+                  <a href="#" className="flex flex-col h-full">
+
+                    {/* Card */}
+                    <div
+                      className="
+                        flex-1
+                        relative
+                        bg-[#D9D9D9]
+                        overflow-hidden
+                        transition-all
+                        duration-300
+                        group-hover:bg-[#E4E4E4]
+                      "
+                    >
+                      {/* Number */}
+                      <div className="absolute top-6 left-6 text-2xl text-[#333]">
+                        {w.n}
+                      </div>
+
+                      {/* Year */}
+                      <div className="absolute top-6 right-6 text-2xl text-[#333]">
+                        {w.year}
+                      </div>
+
+                      {/* Title */}
+                      <div className="absolute left-6 bottom-6">
+                        <h3 className="text-[#222] font-display text-5xl leading-none">
+                          {w.title}
+                        </h3>
+
+                        <p
+                          className="italic text-[#555] leading-none mt-1"
+                          style={{
+                            fontFamily: "'Advent Pro'",
+                            fontSize: "clamp(2rem,2vw,2.8rem)",
+                            fontWeight: 100,
+                          }}
+                        >
+                          {w.sub}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.25em] text-[#7a7a7a]">
+                      <span>{w.tag}</span>
+
+                      <span className="group-hover:translate-x-1 transition-transform">
+                        View →
+                      </span>
+                    </div>
+
+                  </a>
+                </Reveal>
+              ))}
+
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </Panel>
   );
 }
@@ -302,7 +410,7 @@ function AboutPanel() {
 function ServicesPanel() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
-  return (  
+  return (
     <Panel id="services" dark width="130vw">
       <div className="absolute inset-0 " />
       <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
@@ -582,38 +690,93 @@ function MobileView() {
             className="pixelate-heading font-display leading-[0.88] tracking-[-0.04em]"
             style={{ fontSize: "clamp(3rem,15vw,5.5rem)" }}
           >
-            <span
-              className={`pixelate-word block${activeWord === 0 ? " pixelate-active" : ""}`}
-              onPointerEnter={() => activateWord(0)}
-              onPointerLeave={resetWord}
-              onPointerDown={() => activateWord(0)}
-              onPointerUp={resetWord}
-              onPointerCancel={resetWord}
-              onTouchEnd={resetWord}
-            >
-              Design for
+            <span className="block">
+              <span
+                className={`pixelate-word${activeWord === 0 ? " pixelate-active" : ""}`}
+                style={{ fontFamily: "'Pixelify Sans'" }}
+                onPointerEnter={() => activateWord(0)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(0)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                Design
+              </span>
+              {" "}
+              <span
+                className={`pixelate-word${activeWord === 1 ? " pixelate-active" : ""}`}
+                onPointerEnter={() => activateWord(1)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(1)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                for
+              </span>
             </span>
-            <span
-              className={`pixelate-word block${activeWord === 1 ? " pixelate-active" : ""}`}
-              onPointerEnter={() => activateWord(1)}
-              onPointerLeave={resetWord}
-              onPointerDown={() => activateWord(1)}
-              onPointerUp={resetWord}
-              onPointerCancel={resetWord}
-              onTouchEnd={resetWord}
-            >
-              the systems
+            <span className="block">
+              <span
+                className={`pixelate-word${activeWord === 2 ? " pixelate-active" : ""}`}
+                onPointerEnter={() => activateWord(2)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(2)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                the
+              </span>
+              {" "}
+              <span
+                className={`pixelate-word${activeWord === 3 ? " pixelate-active" : ""}`}
+                onPointerEnter={() => activateWord(3)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(3)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                systems
+              </span>
             </span>
-            <span
-              className={`pixelate-word block italic font-light${activeWord === 2 ? " pixelate-active" : ""}`}
-              onPointerEnter={() => activateWord(2)}
-              onPointerLeave={resetWord}
-              onPointerDown={() => activateWord(2)}
-              onPointerUp={resetWord}
-              onPointerCancel={resetWord}
-              onTouchEnd={resetWord}
-            >
-              that come next.
+            <span className="block italic" style={{ fontFamily: "'Advent Pro'", fontWeight: 100 }}>
+              <span
+                className={`pixelate-word${activeWord === 4 ? " pixelate-active" : ""}`}
+                onPointerEnter={() => activateWord(4)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(4)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                that
+              </span>
+              {" "}
+              <span
+                className={`pixelate-word${activeWord === 5 ? " pixelate-active" : ""}`}
+                onPointerEnter={() => activateWord(5)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(5)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                come
+              </span>
+              {" "}
+              <span
+                className={`pixelate-word${activeWord === 6 ? " pixelate-active" : ""}`}
+                onPointerEnter={() => activateWord(6)}
+                onPointerLeave={resetWord}
+                onPointerDown={() => activateWord(6)}
+                onPointerUp={resetWord}
+                onPointerCancel={resetWord}
+                onTouchEnd={resetWord}
+              >
+                next.
+              </span>
             </span>
           </h1>
           <p className="mt-8 text-sm text-[#515151] max-w-[34ch]">

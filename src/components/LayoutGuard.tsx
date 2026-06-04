@@ -109,15 +109,6 @@ export function LayoutGuard({ gridSize = 32 }: { gridSize?: number }) {
   const overlaps = issues.filter((i) => i.kind === "overlap").length;
 
   return (
-    <div className="fixed bottom-3 right-3 z-[9999] pointer-events-none">
-      <div className="bg-ink text-paper text-[10px] uppercase tracking-[0.2em] px-3 py-2 font-mono shadow-lg">
-        <div className="flex items-center gap-3">
-          <span className="h-2 w-2 bg-red-500 animate-pulse" />
-          <span>Layout</span>
-          <span className="opacity-60">align {aligns}</span>
-          <span className="opacity-60">overlap {overlaps}</span>
-        </div>
-      </div>
-    </div>
+   <></>
   );
 }
