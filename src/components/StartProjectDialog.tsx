@@ -95,7 +95,7 @@ export function StartProjectDialog() {
               Close ✕
             </button>
 
-            <div className="px-6 sm:px-10 pt-10 pb-8 border-b" style={{ borderColor: "#0000001A" }}>
+            <div className="px-[50px] pt-[50px] pb-[40px] border-b" style={{ borderColor: "#0000001A" }}>
               <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">
                 [ Start a project ]
               </div>
@@ -124,7 +124,7 @@ export function StartProjectDialog() {
             </div>
 
             {submitted ? (
-              <div className="px-6 sm:px-10 py-16 text-center">
+              <div className="px-[50px] py-[50px] text-center">
                 <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Sent</div>
                 <h3 className="font-display text-3xl mb-3">Thanks — we'll be in touch.</h3>
                 <p className="text-sm opacity-70 mb-6">
@@ -139,7 +139,7 @@ export function StartProjectDialog() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="px-6 sm:px-10 py-8 space-y-6">
+              <form onSubmit={handleSubmit} className="px-[50px] py-[50px] space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <Field
                     label="Name"
