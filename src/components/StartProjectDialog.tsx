@@ -124,7 +124,7 @@ export function StartProjectDialog() {
             </div>
 
             {submitted ? (
-              <div className="px-6 sm:px-10 py-16 text-center">
+              <div className="px-[50px] py-[50px] text-center">
                 <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">Sent</div>
                 <h3 className="font-display text-3xl mb-3">Thanks — we'll be in touch.</h3>
                 <p className="text-sm opacity-70 mb-6">
