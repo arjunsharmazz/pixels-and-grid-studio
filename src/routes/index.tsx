@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { HorizontalCanvas } from "@/components/HorizontalCanvas";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { LayoutGuard } from "@/components/LayoutGuard";
+import { StartProjectDialog, openStartProject, CALENDLY_URL } from "@/components/StartProjectDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 
@@ -71,6 +72,7 @@ function Home() {
       {loading && <Loader onDone={() => setLoading(false)} />}
       {!isMobile && <PixelCursor />}
       {isMobile ? <MobileView /> : <DesktopView />}
+      <StartProjectDialog />
       <LayoutGuard />
     </div>
   );
@@ -258,7 +260,7 @@ function IntroPanel() {
           </p>
           <div className="flex flex-col gap-2">
             <a href="#work" className="bg-ink text-paper px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:opacity-90">View Work →</a>
-            <a href="#contact" className="border border-ink px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:bg-ink hover:text-paper transition-colors">Get in touch</a>
+            <button onClick={openStartProject} className="border border-ink px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-center hover:bg-ink hover:text-paper transition-colors">Get in touch</button>
           </div>
         </Reveal>
 
@@ -597,6 +599,14 @@ function ContactPanel() {
             Start a<br />
             <span className="italic font-light">project →</span>
           </h2>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button onClick={openStartProject} className="px-5 py-3 text-[10px] uppercase tracking-[0.3em]" style={{ backgroundColor: "#FDFDFD", color: "#0A0A0A" }}>
+              Send a brief →
+            </button>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="px-5 py-3 text-[10px] uppercase tracking-[0.3em] border border-paper hover:bg-paper hover:text-ink transition-colors">
+              Book a call ↗
+            </a>
+          </div>
         </div>
 
         <div className="grid grid-cols-12 gap-6 border-t border-[#373737] pt-8">
@@ -874,6 +884,14 @@ function MobileView() {
           <h2 className="font-display leading-[0.88] tracking-[-0.05em]" style={{ fontSize: "clamp(3.5rem,18vw,7rem)" }}>
             Start a<br /><span className="italic font-light">project →</span>
           </h2>
+          <div className="mt-6 flex flex-col gap-3">
+            <button onClick={openStartProject} className="w-full px-5 py-3 text-[10px] uppercase tracking-[0.3em]" style={{ backgroundColor: "#FDFDFD", color: "#0A0A0A" }}>
+              Send a brief →
+            </button>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="w-full text-center px-5 py-3 text-[10px] uppercase tracking-[0.3em] border border-paper">
+              Book a call ↗ Calendly
+            </a>
+          </div>
           <div className="mt-10 border-t border-[#373737] pt-6 space-y-6">
             <div>
               <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-2">Contact</div>
