@@ -95,7 +95,7 @@ export function StartProjectDialog() {
               Close ✕
             </button>
 
-            <div className="px-6 sm:px-10 pt-10 pb-8 border-b" style={{ borderColor: "#0000001A" }}>
+            <div className="px-[50px] pt-[50px] pb-[40px] border-b" style={{ borderColor: "#0000001A" }}>
               <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">
                 [ Start a project ]
               </div>
