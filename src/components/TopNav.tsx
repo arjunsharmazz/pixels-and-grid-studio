@@ -39,12 +39,12 @@ export function TopNav() {
       </div>
 
       {/* CTA */}
-      <a
-        href="#contact"
-        className="shrink-0 border border-ink px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-ink hover:bg-ink hover:text-paper transition-colors duration-200"
+      <button
+        onClick={() => window.dispatchEvent(new Event("open-start-project"))}
+        className="shrink-0 border border-ink px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-ink hover:bg-ink hover:text-paper transition-colors duration-200 cursor-pointer"
       >
         Start a project →
-      </a>
+      </button>
     </nav>
   );
 }
