@@ -382,7 +382,7 @@ function WorkPanel() {
 function AboutPanel() {
   return (
     <Panel id="about" width="120vw">
-      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 grid grid-cols-12 gap-8">
+      <div className="absolute inset-0 p-50 grid grid-cols-12 gap-8">
         <div className="col-span-3">
           <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 03 ] About</div>
           <p className="text-sm text-[#515151] leading-relaxed max-w-[28ch]">
@@ -415,7 +415,7 @@ function ServicesPanel() {
   return (
     <Panel id="services" dark width="130vw">
       <div className="absolute inset-0 " />
-      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+      <div className="absolute inset-0 p-50 flex flex-col">
         <div className="mb-12 text-center">
           <div className="text-[10px] uppercase tracking-[0.3em] text-[#D4AF37] opacity-80 mb-3">[ 04 ] Services</div>
           <h2
@@ -494,7 +494,7 @@ function ServicesPanel() {
 function ProcessPanel() {
   return (
     <Panel id="process" width="140vw">
-      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+      <div className="absolute inset-0 p-50 flex flex-col">
         <div className="mb-10 flex items-end justify-between">
           <div>
             <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 05 ] Process</div>
@@ -568,7 +568,7 @@ function ProcessCard({ delay, className, children }: { delay: number; className:
 function VoicesPanel() {
   return (
     <Panel id="voices" width="140vw">
-      <div className="absolute inset-0 pt-20 pb-20 pl-28 pr-20 flex flex-col">
+      <div className="absolute inset-0 p-50 flex flex-col">
         <div className="mb-12">
           <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ 06 ] Voices</div>
           <h2 data-guard="voices-h2" className="font-display text-6xl tracking-tight">In their <span className="serif-italic text-7xl">words.</span></h2>
@@ -592,7 +592,7 @@ function VoicesPanel() {
 function ContactPanel() {
   return (
     <Panel id="contact" dark width="120vw">
-      <div className="absolute inset-0 pt-20 pb-16 pl-28 pr-20 flex flex-col justify-between">
+      <div className="absolute inset-0 p-50 flex flex-col justify-between">
         <div>
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-6">[ 07 ] Let's build</div>
           <h2 className="font-display text-balance leading-[0.85] tracking-[-0.05em]" style={{ fontSize: "clamp(4rem,12vw,13rem)" }}>
@@ -835,7 +835,7 @@ function MobileView() {
       </MobileSection>
 
       {/* SERVICES dark */}
-      <section id="services" className="relative bg-ink text-paper px-5 py-16">
+      <section id="services" className="relative bg-ink text-paper p-50">
         <div className="absolute inset-0 grid-bg-dark opacity-40" />
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-3">[ 04 ] Services</div>
@@ -877,7 +877,7 @@ function MobileView() {
       </MobileSection>
 
       {/* CONTACT */}
-      <section id="contact" className="relative bg-ink text-paper px-5 pt-20 pb-12">
+      <section id="contact" className="relative bg-ink text-paper p-50">
         <div className="absolute inset-0 grid-bg-dark opacity-30" />
         <div className="relative">
           <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">[ 07 ] Let's build</div>
@@ -920,7 +920,7 @@ function MobileView() {
 
 function MobileSection({ num, title, id, children }: { num: string; title: string; id?: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="px-5 py-16 border-t border-ink">
+    <section id={id} className="p-50 border-t border-ink">
       <div className="text-[10px] uppercase tracking-[0.3em] text-[#6A6A6A] mb-3">[ {num} ] {title}</div>
       <h2 className="font-display text-4xl tracking-tight mb-8">{title}.</h2>
       {children}
