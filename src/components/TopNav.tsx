@@ -3,7 +3,7 @@ const NAV_ITEMS = ["Home", "Work", "About", "Services", "Process", "Contact"];
 export function TopNav() {
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-10 lg:px-14 py-4"
+      className="fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-50 py-25"
       style={{
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
