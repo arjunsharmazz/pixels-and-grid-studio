@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { HorizontalCanvas } from "@/components/HorizontalCanvas";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { LayoutGuard } from "@/components/LayoutGuard";
+import { StartProjectDialog, openStartProject, CALENDLY_URL } from "@/components/StartProjectDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 
