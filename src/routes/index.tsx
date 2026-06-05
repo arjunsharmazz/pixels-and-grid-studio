@@ -599,6 +599,14 @@ function ContactPanel() {
             Start a<br />
             <span className="italic font-light">project →</span>
           </h2>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button onClick={openStartProject} className="px-5 py-3 text-[10px] uppercase tracking-[0.3em]" style={{ backgroundColor: "#FDFDFD", color: "#0A0A0A" }}>
+              Send a brief →
+            </button>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="px-5 py-3 text-[10px] uppercase tracking-[0.3em] border border-paper hover:bg-paper hover:text-ink transition-colors">
+              Book a call ↗
+            </a>
+          </div>
         </div>
 
         <div className="grid grid-cols-12 gap-6 border-t border-[#373737] pt-8">
