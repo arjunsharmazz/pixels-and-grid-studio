@@ -40,6 +40,14 @@
 }
 
 :root {
+  /* --- Spacing System (mirror of @theme spacing tokens) --- */
+  --space-12: 12px;
+  --space-25: 25px;
+  --space-50: 50px;
+  --space-75: 75px;
+  --space-100: 100px;
+  --space-150: 150px;
+
   /* --- Brand Core --- */
   --brand-primary:        #060606; /* Ink — primary brand / buttons / text */
   --brand-secondary:      #FDFDFD; /* Paper — secondary surface */
