@@ -884,6 +884,14 @@ function MobileView() {
           <h2 className="font-display leading-[0.88] tracking-[-0.05em]" style={{ fontSize: "clamp(3.5rem,18vw,7rem)" }}>
             Start a<br /><span className="italic font-light">project →</span>
           </h2>
+          <div className="mt-6 flex flex-col gap-3">
+            <button onClick={openStartProject} className="w-full px-5 py-3 text-[10px] uppercase tracking-[0.3em]" style={{ backgroundColor: "#FDFDFD", color: "#0A0A0A" }}>
+              Send a brief →
+            </button>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="w-full text-center px-5 py-3 text-[10px] uppercase tracking-[0.3em] border border-paper">
+              Book a call ↗ Calendly
+            </a>
+          </div>
           <div className="mt-10 border-t border-[#373737] pt-6 space-y-6">
             <div>
               <div className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-2">Contact</div>
